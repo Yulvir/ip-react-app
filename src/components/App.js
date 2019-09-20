@@ -40,20 +40,7 @@ class App extends Component {
     super(props);
     this.state = {
       latitude: '',
-      longitude: '',
-      city: '',
-      tempInCelsius: true,
-      displayWeather: false,
-      currentDate: '',
-      currentWeatherDesc: '',
-      currentTemp: '',
-      currentWeatherIcon: '',
-      currentWeatherMorning: '',
-      currentWeatherDay: '',
-      currentWeatherEvening: '',
-      currentWeatherNight: '',
-      forecast: '',
-      fiveDayForecast: []
+      longitude: ''
     }
   }
 
@@ -61,8 +48,8 @@ class App extends Component {
   getLocation = () => {
     const showPosition = (position) => {
       this.setState({
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude
+        latitude: position.location.latitude,
+        longitude: position.latitude.longitude
       });
       const lat = this.state.latitude;
       const lon = this.state.longitude;
@@ -91,7 +78,7 @@ class App extends Component {
   }
 
   axiosGETreq = (URL) => {
-    axios.get(`http://localhost:5000?${URL}`)
+    axios.get(`http://localhost:5000?ip=${URL}`)
       .then(res => {
         const weatherData = {
           longitude: res.data.location.longitude,
@@ -217,28 +204,12 @@ class App extends Component {
 
   componentWillMount = () => {
     const cachedData = JSON.parse(localStorage.getItem('data'));
-    const cachedFiveDayForecast = JSON.parse(localStorage.getItem('fiveDayForecast'));
-    const cachedTodaysTemps = JSON.parse(localStorage.getItem('todaysTemps'));
-    const cachedTempInCelsius = JSON.parse(localStorage.getItem('temp'));
 
     if (cachedData) {
       //set state with cached data
       this.setState({
         latitude: cachedData.latitude,
         longitude: cachedData.longitude,
-        city: cachedData.city,
-        displayWeather: cachedData.displayWeather,
-        currentDate: cachedData.currentDate,
-        currentWeatherDesc: cachedData.currentWeatherDesc,
-        currentWeatherIcon: cachedData.currentWeatherIcon,
-        currentTemp: cachedData.currentTemp,
-        forecast: cachedData.forecast,
-        fiveDayForecast: cachedFiveDayForecast,
-        currentWeatherMorning: cachedTodaysTemps.currentWeatherMorning,
-        currentWeatherDay: cachedTodaysTemps.currentWeatherDay,
-        currentWeatherEvening: cachedTodaysTemps.currentWeatherEvening,
-        currentWeatherNight: cachedTodaysTemps.currentWeatherNight,
-        tempInCelsius: cachedTempInCelsius
       });
     }
   }
