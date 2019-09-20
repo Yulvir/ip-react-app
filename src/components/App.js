@@ -83,11 +83,13 @@ class App extends Component {
         const weatherData = {
           longitude: res.data.location.longitude,
           latitude: res.data.location.latitude ,
+          displayWeather: true
 
         }
         this.setState({
           latitude: weatherData.latitude,
           longitude: weatherData.longitude,
+          displayWeather: weatherData.displayWeather
         });
         //this.getTodaysTemps();
         //this.getFiveDayForecast();
@@ -98,109 +100,6 @@ class App extends Component {
       });
   }
 
-  //since temps are coming as Kelvins we need to convert them
-  calculateTemp = (temp) => {
-    if (this.state.tempInCelsius) {
-      return Math.round(temp - 273.15) + "℃";
-    }
-    return Math.round((temp * 9/5) - 459.67) + "℉";
-  }
-
-  findDate = () => {
-    const date = new Date();
-    const day = date.getDate();
-    const weekday = date.getDay();
-    const month = date.getMonth();
-    const year = date.getFullYear();
-    return `${days[weekday]}, ${months[month]} ${day} ${year}`
-  }
-
-  //get temps for today by looping through the weather data array
-  getTodaysTemps = () => {
-    const forecast = this.state.forecast;
-    const todaysTemps = {};
-    for(let i = 0; i < 8; i++) {
-      if (forecast[i].dt_txt[12] === "6") {
-        this.setState({currentWeatherMorning: forecast[i].main.temp});
-        todaysTemps["currentWeatherMorning"] = forecast[i].main.temp;
-      }
-      if (forecast[i].dt_txt[12] === "2") {
-        this.setState({currentWeatherDay: forecast[i].main.temp});
-        todaysTemps["currentWeatherDay"] = forecast[i].main.temp;
-      }
-      if (forecast[i].dt_txt[12] === "8") {
-        this.setState({currentWeatherEvening: forecast[i].main.temp});
-        todaysTemps["currentWeatherEvening"] = forecast[i].main.temp;
-      }
-      if (forecast[i].dt_txt[12] === "0") {
-        this.setState({currentWeatherNight: forecast[i].main.temp});
-        todaysTemps["currentWeatherNight"] = forecast[i].main.temp;
-      }
-    }
-    localStorage.setItem('todaysTemps', JSON.stringify(todaysTemps));
-  }
-
-  //get five day forecast array by searching for the 12pm time
-  getFiveDayForecast = () => {
-    const forecast = this.state.forecast;
-    const container = [];
-    for (let i = 0; i < forecast.length; i++) {
-      if (forecast[i].dt_txt[12] === "2") {
-        container.push(forecast[i]);
-      }
-    }
-    if (container.length === 4) {
-      const today = {
-        main: {
-          temp: this.state.currentTemp
-        },
-        weather: [
-          {
-          icon: this.state.currentWeatherIcon
-          }
-        ]
-      };
-      container.unshift(today);
-    }
-    this.setState({fiveDayForecast: container});
-    localStorage.setItem('fiveDayForecast', JSON.stringify(this.state.fiveDayForecast));
-  }
-
-  whatDayIsIt = (index) => {
-    const date = new Date();
-    const weekday = date.getDay();
-    return (<p className="forecast-day">{days[weekday + index]}</p>);
-  }
-
-  //this sets tempInCelsius to either true or false
-  handleTempChange = (e) => {
-    this.setState({tempInCelsius: e.target.checked});
-    localStorage.setItem('temp', JSON.stringify(e.target.checked));
-    this.forceUpdate();
-  }
-
-  renderTodaysTemps = (time, temp) => {
-    return (
-      <li className="todays-weather">
-        <p>{time}</p>
-        <p className="time-of-day">{this.calculateTemp(temp)}</p>
-      </li>
-    )
-  }
-
-  renderWeatherIcons = (code) => {
-    const iconClass = `wi ${iconList[code]} current-weather-icon`;
-    return (<i className={iconClass}></i>)
-  }
-
-  renderForecastIcons = (code) => {
-    const iconClass = `wi ${iconList[code]} forecast-weather-icon`;
-    return (<i className={iconClass}></i>)
-  }
-
-  capitalizeFirstLetter = (str) => {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  }
 
   componentWillMount = () => {
     const cachedData = JSON.parse(localStorage.getItem('data'));
@@ -214,6 +113,7 @@ class App extends Component {
     }
   }
 
+
   render() {
     return (
       <div>
@@ -221,64 +121,34 @@ class App extends Component {
           !this.state.displayWeather && (
             <div className="search-container">
               <form onSubmit={this.handleSubmit}>
-                <input className="search-input" type="text" value={this.state.city} placeholder="City" onChange={this.handleSearch}/>
+                <input className="search-input" type="text" value={this.state.city} placeholder="192.168.0.1" onChange={this.handleSearch}/>
                 <button id="submit-btn" type="submit">
                   <Search size={35} className="search-icon" />
                 </button>
               </form>
-              <p>or</p>
-              <p className="search-curent-loc">use my <a onClick={this.getLocation}>current position</a></p>
             </div>
           )
         }
         {
           this.state.displayWeather && (
             <div className="weather-container">
+
               <div className="upper-section">
                 <div className="back-and-city">
                   <BackArrow size={35} onClick={ () => { this.setState({displayWeather: false})}} />
-                  <h2 className="city-desktop">{this.data.city}</h2>
-                </div>
-                <div className="toggle-btn">
-                  <label>
-                    <Toggle
-                      defaultChecked={this.state.tempInCelsius}
-                      className='custom-classname'
-                      icons={{
-                        checked: "℃",
-                        unchecked: "℉",
-                      }}
-                      onChange={this.handleTempChange} />
-                  </label>
+
                 </div>
               </div>
               <h2 className="city-mobile">{this.state.city}</h2>
               <div>
                 <div className="date-weather">
-                  <h3 className="current-date">{this.findDate()}</h3>
-                  <h4 className="current-weather-desc">{this.capitalizeFirstLetter(this.state.currentWeatherDesc)}</h4>
                 </div>
                 <div className="current-weather-data">
-                  <div className="current-weather-temp">{this.calculateTemp(this.state.currentTemp)}</div>
-                  <div>{this.renderWeatherIcons(this.state.currentWeatherIcon)}</div>
-                  <ul className="todays-weather-parent">
-                    {this.renderTodaysTemps("Morning", this.state.currentWeatherMorning)}
-                    {this.renderTodaysTemps("Day", this.state.currentWeatherDay)}
-                    {this.renderTodaysTemps("Evening", this.state.currentWeatherEvening)}
-                    {this.renderTodaysTemps("Night", this.state.currentWeatherNight)}
-                  </ul>
+                <h2 className="city-desktop">{this.state.longitude}</h2>
+                <h2 className="city-desktop">{this.state.latitude}</h2>
                 </div>
                 <div>
-                  <div className="forecast-list-parent">
-                    {this.state.fiveDayForecast.map((forecast, index) => (
-                      <div className="forecast-list" key={index.toString()}>
-                        {this.whatDayIsIt(index)}
-                        {this.renderForecastIcons(forecast.weather[0].icon)}
-                        <div className="forecast-temp">{this.calculateTemp(forecast.main.temp)}</div>
-                      </div>
-                    )
-                    )}
-                  </div>
+
                 </div>
               </div>
             </div>
