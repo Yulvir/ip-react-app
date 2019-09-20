@@ -1,0 +1,167 @@
+/*///////////////////////////////////////
+DASHBOARD STYLES
+///////////////////////////////////////*/
+
+.weather-container {
+  text-align: center;
+}
+
+.upper-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: .8em;
+}
+
+.city-desktop {
+  display: none;
+}
+
+.city-mobile {
+  font-size: 4em;
+  font-weight: 300;
+}
+
+.current-date {
+  font-weight: 400;
+  font-size: 2em;
+  margin-bottom: 0;
+}
+
+.current-weather-desc {
+  font-weight: 300;
+  font-size: 1.5em;
+  margin-top: .5em;
+}
+
+.current-weather-temp {
+  font-size: 5em;
+  font-weight: 400;
+  margin-top: .5em;
+  color: #f97970;
+}
+
+.todays-weather {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 40%;
+  margin: 0 auto;
+  margin-top: .8em;
+  font-size: 1.5em;
+  font-weight: 300;
+  color: #f97970;
+}
+
+.todays-weather p {
+  margin: 0;
+}
+
+.todays-weather-parent li {
+  margin-top: 0;
+  margin-bottom: .5em;
+}
+
+.current-weather-icon {
+  font-size: 8em;
+  color: #f97970;
+  margin-top: .1em;
+  margin-bottom: .5em;
+}
+
+.forecast-weather-icon {
+  font-size: 3em;
+  color: #515151;
+}
+
+.forecast-temp,
+.forecast-day {
+  font-size: 1.2em;
+  font-weight: 300;
+  margin-top: .5em;
+}
+
+.forecast-list {
+  margin-top: 2em;
+}
+
+/*///////////////////////////////////////
+MEDIA QUERIES
+///////////////////////////////////////*/
+
+@media screen and (min-width: 840px) {
+
+  .upper-section {
+    padding: 0;
+  }
+
+  .city-mobile {
+    display: none;
+  }
+
+  .city-desktop {
+    display: block;
+    margin: 0;
+    margin-left: 1em;
+    font-size: 2em;
+  }
+
+  .back-and-city {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .date-weather {
+    margin-top: 2.5em;
+    text-align: left;
+  }
+
+  .current-date {
+    font-weight: 300;
+  }
+
+  .current-weather-data {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 67%;
+    margin-top: 1em;
+  }
+
+  .current-weather-temp {
+    font-size: 6em;
+    margin-top: .3em;
+  }
+
+  .todays-weather {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0;
+    margin-top: .5em;
+    font-size: 1.4em;
+  }
+
+
+
+  .todays-weather-parent {
+    display: flex;
+    flex-direction: column;
+    min-width: 160px;
+  }
+
+
+
+  .time-of-day {
+    margin-left: auto;
+  }
+
+  .forecast-list-parent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+}

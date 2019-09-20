@@ -1,0 +1,24 @@
+/*///////////////////////////////////////
+GENERAL STYLES
+///////////////////////////////////////*/
+
+body {
+  margin: 0;
+  padding: 2em 2em;
+  background: #fff;
+  color: #515151;
+  font-family: 'Roboto', sans-serif
+}
+
+#submit-btn {
+  background: none;
+  border: none;
+  width: 0;
+  height: 0;
+}
+
+textarea:focus,
+input:focus,
+*:focus {
+    outline: none;
+}
