@@ -4,7 +4,7 @@ import '../css/toggleButton.css';
 import '../css/dashboard.css';
 import axios from 'axios';
 import Toggle from 'react-toggle';
-
+import Clipboard from 'react-clipboard.js';
 import Search from 'react-icons/lib/md/search';
 import BackArrow from 'react-icons/lib/md/arrow-back';
 
@@ -48,13 +48,14 @@ class App extends Component {
   getLocation = () => {
     const showPosition = (position) => {
       this.setState({
-        latitude: position.location.latitude,
-        longitude: position.latitude.longitude
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        displayWeather: true
       });
-      const lat = this.state.latitude;
-      const lon = this.state.longitude;
-      this.axiosGETreq(`1.2.1.1`);
+
     }
+    console.log("user latitude is" + this.state.longitude);
+    console.log("user longitude is" + this.state.latitude);
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
@@ -113,6 +114,14 @@ class App extends Component {
     }
   }
 
+  onSuccess() {
+    console.info('successfully copied');
+  }
+
+  getText() {
+    return this.state.latitude + this.state.longitude;
+  }
+
 
   render() {
     return (
@@ -126,6 +135,8 @@ class App extends Component {
                   <Search size={35} className="search-icon" />
                 </button>
               </form>
+              <p>or</p>
+              <p className="search-curent-loc">use my <a onClick={this.getLocation}>current position</a></p>
             </div>
           )
         }
@@ -142,6 +153,12 @@ class App extends Component {
             </div>
 
             <div className="search-container">latitude: {this.state.longitude} , longitude: {this.state.latitude}</div>
+            <div>
+            <Clipboard option-text={this.getText} onSuccess={this.onSuccess}>
+              copy to clipboard
+            </Clipboard>
+            </div>
+
             </div>
           )
         }
@@ -151,21 +168,3 @@ class App extends Component {
 }
 
 export default App;
-
-//
-// <div className="todays-weather">
-//   <div>Morning</div>
-//   <div className="time-of-day">{this.calculateTemp(this.state.currentWeatherMorning)}</div>
-// </div>
-// <div className="todays-weather">
-//   <div>Day</div>
-//   <div>{this.calculateTemp(this.state.currentWeatherDay)}</div>
-// </div>
-// <div className="todays-weather">
-//   <div>Evening</div>
-//   <div>{this.calculateTemp(this.state.currentWeatherEvening)}</div>
-// </div>
-// <div className="todays-weather">
-//   <div>Night</div>
-//   <div>{this.calculateTemp(this.state.currentWeatherNight)}</div>
-// </div>
