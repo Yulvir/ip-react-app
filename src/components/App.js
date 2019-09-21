@@ -130,27 +130,18 @@ class App extends Component {
           )
         }
         {
-          this.state.displayWeather && (
-            <div className="weather-container">
+          this.state.displayWeather &&
 
-              <div className="upper-section">
-                <div className="back-and-city">
-                  <BackArrow size={35} onClick={ () => { this.setState({displayWeather: false})}} />
+          (
+            <div>
+            <div className="upper-section">
+              <div className="back-and-city">
+                <BackArrow size={35} onClick={ () => { this.setState({displayWeather: false})}} />
 
-                </div>
               </div>
-              <h2 className="city-mobile">{this.state.city}</h2>
-              <div>
-                <div className="date-weather">
-                </div>
-                <div className="current-weather-data">
-                <h2 className="city-desktop">{this.state.longitude}</h2>
-                <h2 className="city-desktop">{this.state.latitude}</h2>
-                </div>
-                <div>
+            </div>
 
-                </div>
-              </div>
+            <div className="search-container">latitude: {this.state.longitude} , longitude: {this.state.latitude}</div>
             </div>
           )
         }
