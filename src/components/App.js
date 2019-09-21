@@ -109,7 +109,7 @@ class App extends Component {
       //set state with cached data
       this.setState({
         latitude: cachedData.latitude,
-        longitude: cachedData.longitude,
+      longitude: cachedData.longitude,
       });
     }
   }
