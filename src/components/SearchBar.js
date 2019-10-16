@@ -15,6 +15,9 @@ class SearchBar extends Component {
       longitude: '',
       ip: '72.82.110.100'
     }
+
+    this.onSuccess = this.onSuccess.bind(this);
+    this.getText = this.getText.bind(this);
   }
 
 
@@ -71,8 +74,6 @@ class SearchBar extends Component {
           ip: IP ,
           displayWeather: weatherData.displayWeather
         });
-        //this.getTodaysTemps();
-        //this.getFiveDayForecast();
         localStorage.setItem('data', JSON.stringify(weatherData));
       })
       .catch(error => {
@@ -100,7 +101,8 @@ class SearchBar extends Component {
   }
 
   getText() {
-    return this.state.latitude + this.state.longitude;
+    console.log(this.state)
+    return this.state.latitude.toString() + "," +  this.state.longitude.toString();
   }
 
 
