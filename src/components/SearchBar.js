@@ -13,6 +13,7 @@ class SearchBar extends Component {
     this.state = {
       latitude: '',
       longitude: '',
+      ip: '72.82.110.100'
     }
   }
 
@@ -39,30 +40,35 @@ class SearchBar extends Component {
 
   //update state with search value
   handleSearch = (event) => {
+    console.log(event)
     this.setState({
-      city: event.target.value
+      ip: event.target.value
     });
   }
 
   //submit a GET request
   handleSubmit = (e) => {
     e.preventDefault();
-    const loc = this.state.city;
-    this.axiosGETreq(`1.2.1.1`);
+    console.log(e);
+    console.log(this.state)
+    const loc = this.state.ip;
+    this.axiosGETreq(loc);
   }
 
-  axiosGETreq = (URL) => {
-    axios.get(`http://localhost:5000?ip=${URL}`)
+  axiosGETreq = (IP) => {
+    axios.get(`http://localhost:5000?ip=${IP}`)
       .then(res => {
         const weatherData = {
           longitude: res.data.location.longitude,
           latitude: res.data.location.latitude ,
+          ip: IP ,
           displayWeather: true
 
         }
         this.setState({
           latitude: weatherData.latitude,
           longitude: weatherData.longitude,
+          ip: IP ,
           displayWeather: weatherData.displayWeather
         });
         //this.getTodaysTemps();
@@ -81,8 +87,9 @@ class SearchBar extends Component {
     if (cachedData) {
       //set state with cached data
       this.setState({
-        latitude: cachedData.latitude,
+      latitude: cachedData.latitude,
       longitude: cachedData.longitude,
+      ip: cachedData.ip
       });
     }
   }
@@ -105,7 +112,7 @@ class SearchBar extends Component {
           !this.state.displayWeather && (
             <div className="search-container">
               <form onSubmit={this.handleSubmit}>
-                <input className="search-input" type="text" value={this.state.city} placeholder="192.168.0.1" onChange={this.handleSearch}/>
+                <input className="search-input" type="text" value={this.state.ip} placeholder="72.82.110.100" onChange={this.handleSearch}/>
                 <button id="submit-btn" type="submit">
                   <Search size={35} className="search-icon" />
                 </button>
