@@ -5,7 +5,6 @@ import GoogleMapContainer from './GoogleMap.js';
 import SearchBar from './SearchBar.js';
 import NavBar from './NavBar.js';
 
-
 const lDivStyle = {
   "width": "50%",
   "height": "inherit",

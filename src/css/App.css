@@ -15,7 +15,7 @@ SEARCH VIEW STYLES
 
 .parent-div {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: table;
 }
 #nav {
@@ -40,16 +40,13 @@ SEARCH VIEW STYLES
 
 .search-container form {
   border-bottom: 2px solid #515151;
-  margin: 0 auto;
+  margin: 20%;
   display: inline-flex;
 }
 
 .search-icon {
   margin-left: -25px;
 }
-
-
-
 
 
 .search-container input {
