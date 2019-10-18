@@ -12,6 +12,24 @@ SEARCH VIEW STYLES
 
 }
 
+.table-results {
+  width: 100%;
+  display: table-cell;
+  "width": 50%;
+  "height": inherit;
+  "display": table-cell;
+}
+
+
+.results-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: inherit;
+  height: 100%;
+
+}
 
 .parent-div {
     width: 100%;

@@ -1,5 +1,5 @@
 {
-  "name": "react-weather-app",
+  "name": "react-ip-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,6 +13,7 @@
     "react-redux": "^7.1.1",
     "react-scripts": "1.0.16",
     "react-toggle": "^4.0.2",
+    "redux": "^4.0.4",
     "weather-icons": "^1.3.2"
   },
   "scripts": {

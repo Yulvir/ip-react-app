@@ -3,7 +3,12 @@ import axios from 'axios';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import GoogleMapContainer from './GoogleMap.js';
 import SearchBar from './SearchBar.js';
+import ResultsContent from './ResultsContent.js';
 import NavBar from './NavBar.js';
+
+import List from "./List";
+import Form from "./Form";
+
 
 const lDivStyle = {
   "width": "50%",
@@ -31,7 +36,7 @@ class App extends Component {
 
       <div>
           <div className="parent-div">
-            <div style={lDivStyle}> <SearchBar/></div>
+              <div style={lDivStyle}> <SearchBar/></div>
               <div style={rDivStyle}> <GoogleMapContainer/></div>
 
           </div>
@@ -39,8 +44,23 @@ class App extends Component {
 
       <div>
 
+      <div classname="table-results"> <ResultsContent/></div>
 
-      </div>
+
+
+
+
+            <h2>Articles</h2>
+            <List />
+            </div>
+            <div>
+              <h2>Add a new article</h2>
+              <Form />
+            </div>
+
+
+
+
       </div>
     );
   }
