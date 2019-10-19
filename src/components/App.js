@@ -42,22 +42,14 @@ class App extends Component {
           </div>
       </div>
 
-      <div>
-
-      <div classname="table-results"> <ResultsContent/></div>
 
 
-
-
-
-            <h2>Articles</h2>
-            <List />
-            </div>
             <div>
-              <h2>Add a new article</h2>
+              <h2>Search IP</h2>
               <Form />
             </div>
-
+            <h2>Searched IP</h2>
+            <List />
 
 
 

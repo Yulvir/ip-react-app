@@ -6,8 +6,9 @@ import registerServiceWorker from './registerServiceWorker';
 import { Provider } from "react-redux";
 import store from "./js/store/index";
 
-// var express = require('express');
-// Import the library:
+
+// https://www.valentinog.com/blog/redux/
+
 
 ReactDOM.render(
 
