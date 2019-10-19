@@ -6,6 +6,17 @@ import Clipboard from 'react-clipboard.js';
 import Search from 'react-icons/lib/md/search';
 import BackArrow from 'react-icons/lib/md/arrow-back';
 import 'weather-icons/css/weather-icons.css';
+import {connect} from "react-redux";
+import {setLocationSearch} from "../js/actions/latitude-longitude-action";
+
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setLocationSearch: output => dispatch(setLocationSearch(output))
+  };
+}
+
 
 class SearchBar extends Component {
   constructor(props) {
@@ -14,7 +25,7 @@ class SearchBar extends Component {
       latitude: '',
       longitude: '',
       ip: '72.82.110.100'
-    }
+    };
 
     this.onSuccess = this.onSuccess.bind(this);
     this.getText = this.getText.bind(this);
@@ -47,16 +58,17 @@ class SearchBar extends Component {
     this.setState({
       ip: event.target.value
     });
-  }
+  };
 
   //submit a GET request
   handleSubmit = (e) => {
     e.preventDefault();
     console.log(e);
-    console.log(this.state)
+    console.log(this.state);
+    this.props.setLocationSearch(this.state);
     const loc = this.state.ip;
     this.axiosGETreq(loc);
-  }
+  };
 
   axiosGETreq = (IP) => {
     axios.get(`http://localhost:5000?ip=${IP}`)
@@ -151,5 +163,9 @@ class SearchBar extends Component {
     );
   }
 }
+const SearchBarForm = connect(
+  null,
+  mapDispatchToProps
+)(SearchBar);
+export default SearchBarForm;
 
-export default SearchBar

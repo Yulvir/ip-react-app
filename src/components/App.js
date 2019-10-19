@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
-import GoogleMapContainer from './GoogleMap.js';
+import ConnectedGoogleApiWrapper from './GoogleMap.js';
 import SearchBar from './SearchBar.js';
 import ResultsContent from './ResultsContent.js';
 import NavBar from './NavBar.js';
@@ -37,7 +37,7 @@ class App extends Component {
       <div>
           <div className="parent-div">
               <div style={lDivStyle}> <SearchBar/></div>
-              <div style={rDivStyle}> <GoogleMapContainer/></div>
+              <div style={rDivStyle}> <ConnectedGoogleApiWrapper/></div>
 
           </div>
       </div>

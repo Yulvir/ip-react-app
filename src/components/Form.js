@@ -7,6 +7,9 @@ function mapDispatchToProps(dispatch) {
     addArticle: article => dispatch(addArticle(article))
   };
 }
+
+
+
 class ConnectedForm extends Component {
   constructor(props) {
     super(props);
@@ -43,6 +46,9 @@ class ConnectedForm extends Component {
     );
   }
 }
+
+
+
 const Form = connect(
   null,
   mapDispatchToProps
