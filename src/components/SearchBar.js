@@ -42,6 +42,8 @@ class SearchBar extends Component {
       });
 
     }
+    this.props.setLocationSearch(this.state);
+
     console.log("user latitude is" + this.state.longitude);
     console.log("user longitude is" + this.state.latitude);
 
@@ -54,7 +56,6 @@ class SearchBar extends Component {
 
   //update state with search value
   handleSearch = (event) => {
-    console.log(event)
     this.setState({
       ip: event.target.value
     });
@@ -63,9 +64,6 @@ class SearchBar extends Component {
   //submit a GET request
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
-    console.log(this.state);
-    this.props.setLocationSearch(this.state);
     const loc = this.state.ip;
     this.axiosGETreq(loc);
   };
@@ -86,6 +84,9 @@ class SearchBar extends Component {
           ip: IP ,
           displayWeather: weatherData.displayWeather
         });
+
+        this.props.setLocationSearch(this.state);
+
         localStorage.setItem('data', JSON.stringify(weatherData));
       })
       .catch(error => {
@@ -168,4 +169,3 @@ const SearchBarForm = connect(
   mapDispatchToProps
 )(SearchBar);
 export default SearchBarForm;
-
