@@ -36,11 +36,11 @@ class SearchBar extends Component {
   //get current location of user and call the API
   getLocation = () => {
     const showPosition = (position) => {
-
+      console.log(position)
       this.setState({
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
-        displayWeather: true
+        displayWeather: true,
       });
       this.props.setLocationSearch(this.state);
 
@@ -77,15 +77,15 @@ class SearchBar extends Component {
           longitude: res.data.location.longitude,
           latitude: res.data.location.latitude ,
           ip: IP ,
-          displayWeather: true
+          displayWeather: true,
+          cityName: res.data.city.names.en,
+          continentName: res.data.continent.names.en,
+          countryName: res.data.country.names.en,
+          postalCode: res.data.postal.code,
+          timeZone: res.data.location.time_zone,
 
         }
-        this.setState({
-          latitude: weatherData.latitude,
-          longitude: weatherData.longitude,
-          ip: IP ,
-          displayWeather: weatherData.displayWeather
-        });
+        this.setState(weatherData);
 
         this.props.setLocationSearch(this.state);
 

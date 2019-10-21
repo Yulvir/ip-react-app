@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import {ConnectedGoogleMapContainer} from './GoogleMap.js';
 import SearchBarForm from './SearchBar.js';
-import ResultsContent from './ResultsContent.js';
+import {ConnectedResultsContent} from './ResultsContent.js';
 import NavBar from './NavBar.js';
 
 import List from "./List";
@@ -50,7 +50,7 @@ class App extends Component {
             </div>
             <h2>Searched IP</h2>
             <List />
-
+            <ConnectedResultsContent/>
 
 
       </div>
