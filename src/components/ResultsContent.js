@@ -51,15 +51,15 @@ export class ResultsContent extends Component {
 
   render() {
     return (
-      <table className="table-results">
-      <tr>
+      <table className="table">
+      <tr className="table-row">
         <th>City</th>
         <th>Continent</th>
         <th>Country</th>
         <th>Postal Code</th>
         <th>Time Zone</th>
       </tr>
-      <tr>
+      <tr  className="table-row">
       {this.displayMarkers()}
       </tr>
     </table>

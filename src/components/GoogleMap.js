@@ -9,10 +9,6 @@ const mapStateToProps = (state) => {
 };
 
 
-const mapStyles = {
-width: '50%',
-height: '50%'
-};
 
 export class GoogleMapContainer extends Component  {
   constructor(props) {
@@ -53,17 +49,15 @@ export class GoogleMapContainer extends Component  {
 
   render() {
     return (
-      <div>
         <Map
           google={this.props.google}
           zoom={8}
-          style={mapStyles}
           center={this.state.initialLocation}
           initialCenter={this.state.initialLocation}
+          containerStyle={{ width: '400px', height: '400px', display: "block"}} 
         >
         {this.displayMarkers()}
         </Map>
-        </div>
     );
   }
 }

@@ -2,22 +2,37 @@
 SEARCH VIEW STYLES
 ///////////////////////////////////////*/
 
-.search-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: inherit;
-  height: 100%;
 
+.map-div {
+    width: 50%;
+    height: 50%;
+    top: 0;
+    left: 50%;
+    display: table-cell;
 }
 
-.table-results {
-  width: 100%;
-  display: table-cell;
-  "width": 50%;
-  "height": inherit;
-  "display": table-cell;
+
+.row {
+      width: 100%;
+      height: auto;
+      text-align: center;
+      align-content: center;
+    }
+.col {
+      width: 33.3%;
+      height: 500px;
+      float: left;
+}​
+table {
+   float: center;
+ }
+
+.table{
+   width: 100%;
+}
+
+.table-row{
+   width: 100%;
 }
 
 
@@ -55,28 +70,6 @@ SEARCH VIEW STYLES
         font-weight: bold;
         color: #069;
         border-right: 1px solid #ccc; }
-
-.search-container form {
-  border-bottom: 2px solid #515151;
-  margin: 20%;
-  display: inline-flex;
-}
-
-.search-icon {
-  margin-left: -25px;
-}
-
-
-.search-container input {
-  width: 100%;
-  height: 100%;
-  border: none;
-  text-align: center;
-  color: #777777;
-  font-size: 2em;
-  text-indent: 35px;
-  margin-right: 25px;
-}
 
 
 

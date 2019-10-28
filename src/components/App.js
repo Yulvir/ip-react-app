@@ -10,18 +10,6 @@ import List from "./List";
 import Form from "./Form";
 
 
-const lDivStyle = {
-  "width": "50%",
-  "height": "inherit",
-   "display": "table-cell"
-}
-
-const rDivStyle = {
-    "width": "50%",
-    "height": "100%",
-   "display": "table-cell"
-}
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -34,26 +22,24 @@ class App extends Component {
       <NavBar/>
 
 
-      <div>
-          <div className="parent-div">
-              <div style={lDivStyle}> <SearchBarForm/></div>
-              <div style={rDivStyle}> <ConnectedGoogleMapContainer/></div>
 
+      <div className="row">
+        <div className="col">
+        <SearchBarForm/>
           </div>
+        <div className="col">
+            <ConnectedGoogleMapContainer/>
+        </div>
+        <div className="col">
+            Column
+        </div>
       </div>
 
-
-
-            <div>
-              <h2>Search IP</h2>
-              <Form />
-            </div>
-            <h2>Searched IP</h2>
-            <List />
-            <ConnectedResultsContent/>
-
-
+      <div className="row">
+          <ConnectedResultsContent/>
       </div>
+      </div>
+
     );
   }
 }
