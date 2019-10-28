@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../css/App.css';
 import axios from 'axios';
 import Toggle from 'react-toggle';
 import Clipboard from 'react-clipboard.js';
@@ -8,6 +7,7 @@ import BackArrow from 'react-icons/lib/md/arrow-back';
 import 'weather-icons/css/weather-icons.css';
 import {connect} from "react-redux";
 import {setLocationSearch} from "../js/actions/latitude-longitude-action";
+import publicIP from 'react-native-public-ip';
 
 
 
@@ -32,6 +32,24 @@ class SearchBar extends Component {
     this.getText = this.getText.bind(this);
   }
 
+
+  getIp = () => {
+
+    publicIP()
+      .then(ip => {
+        console.log(ip)
+        this.state.ip = ip
+        this.handleSubmitCurrentIp(this.state);
+        console.log(ip)
+        // '47.122.71.234'
+      })
+      .catch(error => {
+        console.log(error);
+        // 'Unable to get IP address.'
+      });
+      publicIP()
+
+  }
 
   //get current location of user and call the API
   getLocation = () => {
@@ -69,6 +87,14 @@ class SearchBar extends Component {
     const loc = this.state.ip;
     this.axiosGETreq(loc);
   };
+
+
+    //submit a GET request
+    handleSubmitCurrentIp = () => {
+      const loc = this.state.ip;
+      this.axiosGETreq(loc);
+    };
+
 
   axiosGETreq = (IP) => {
     axios.get(`http://localhost:5000?ip=${IP}`)
@@ -136,6 +162,8 @@ class SearchBar extends Component {
               </form>
               <p>or</p>
               <p className="search-curent-loc">use my <a onClick={this.getLocation}>current position</a></p>
+              <p className="search-curent-loc">use my <a onClick={this.getIp}>current ip</a></p>
+
             </div>
           )
         }

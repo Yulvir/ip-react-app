@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../css/App.css';
 import axios from 'axios';
 import Toggle from 'react-toggle';
 import Clipboard from 'react-clipboard.js';

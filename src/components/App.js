@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import {ConnectedGoogleMapContainer} from './GoogleMap.js';
+import SearchedIp from './SearchedIp.js';
 import SearchBarForm from './SearchBar.js';
+
 import {ConnectedResultsContent} from './ResultsContent.js';
 import NavBar from './NavBar.js';
 
@@ -49,7 +51,8 @@ class App extends Component {
               <Form />
             </div>
             <h2>Searched IP</h2>
-            <List />
+            <List/>
+            <SearchedIp/>
             <ConnectedResultsContent/>
 
 
