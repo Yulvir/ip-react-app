@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
 
 
 const mapStyles = {
-width: '80%',
+width: '100%',
 height: '80%'
 };
 
