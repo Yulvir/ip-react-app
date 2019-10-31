@@ -10,8 +10,8 @@ const mapStateToProps = (state) => {
 
 
 const mapStyles = {
-width: '100%',
-height: '100%'
+width: '80%',
+height: '80%'
 };
 
 export class GoogleMapContainer extends Component  {
@@ -53,7 +53,7 @@ export class GoogleMapContainer extends Component  {
 
   render() {
     return (
-      <div>
+
         <Map
           google={this.props.google}
           zoom={8}
@@ -63,7 +63,7 @@ export class GoogleMapContainer extends Component  {
         >
         {this.displayMarkers()}
         </Map>
-        </div>
+
     );
   }
 }
