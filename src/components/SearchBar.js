@@ -188,7 +188,7 @@ class SearchBar extends Component {
                         <div style={{marginTop: "5%"}}>
                             <div className="input-group mb-3">
 
-                                <input className="form-control"  type="text" aria-label="Search" value={this.state.ip}
+                                <input className="form-control" type="text" aria-label="Search" placeholder={"Your current IP \t ==> \t" + this.state.ip}
                                         onChange={this.handleSearch}/>
                                 <div className="input-group-append">
 
