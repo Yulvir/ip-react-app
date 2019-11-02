@@ -33,4 +33,15 @@ ReactDOM.render(
 );
 
 
+// Square – 250 x 250
+// Small Square – 200 x 200
+// Banner – 468 x 60
+// Leaderboard – 728 x 90
+// Inline Rectangle – 300 x 250
+// Large Rectangle – 336 x 280
+// Skyscraper – 120 x 600
+// Wide Skyscraper – 160 x 600
+// Half-Page Ad – 300 x 600
+// Large Leaderboard – 970 x 90
+
 registerServiceWorker();

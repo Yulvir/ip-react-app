@@ -24,7 +24,8 @@ class SearchBar extends Component {
             latitude: '',
             longitude: '',
             ip: '72.82.110.100',
-            displayWeather: false
+            displayWeather: false,
+            ipNotValid: false
         };
 
         this.onSuccess = this.onSuccess.bind(this);
@@ -72,12 +73,30 @@ class SearchBar extends Component {
             alert("Current location is not supported by this browser");
         }
     }
+    validateIPaddress = (ipaddress) => {
 
+        alert("You have entered an invalid IP address!");
+        return false
+    };
     //update state with search value
     handleSearch = (event) => {
-        this.setState({
-            ip: event.target.value
-        });
+
+        if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(event.target.value)) {
+
+            this.setState({
+                ip: event.target.value,
+                ipNotValid: false
+
+            });
+
+        } else {
+
+            this.setState({
+                ip: event.target.value,
+                ipNotValid: true
+            });
+        }
+
     };
 
     //submit a GET request
@@ -110,6 +129,7 @@ class SearchBar extends Component {
                     timeZone: res.data.location.time_zone,
 
                 }
+
                 this.setState(weatherData);
 
                 this.props.setLocationSearch(this.state);
@@ -118,6 +138,8 @@ class SearchBar extends Component {
             })
             .catch(error => {
                 console.log(error);
+                this.state.ipNotValid = !this.state.ipNotValid
+                console.log(this.state.ipNotValid);
             });
     }
 
@@ -132,6 +154,7 @@ class SearchBar extends Component {
                 longitude: cachedData.longitude,
                 ip: cachedData.ip
             });
+            this.getIp()
         }
     }
 
@@ -150,68 +173,45 @@ class SearchBar extends Component {
         return (
             <div>
 
-                {
-                    !this.state.displayWeather && (
-                        <div>
-                            <form onSubmit={this.handleSubmit}>
-                                <div  style={{marginTop: "5%"}}>
-                                    <div className="input-group mb-3">
 
-                                    <input className="form-control" type="text" aria-label="Search" value={this.state.ip}
-                                           placeholder="72.82.110.100" onChange={this.handleSearch}/>
-                                    <div className="input-group-append">
+                {
+                    this.state.ipNotValid && (
+                        <div className="alert alert-danger" role="alert">
+                            Ip not valid
+                        </div>
+                    )
+                }
+
+
+                <div>
+                    <form onSubmit={this.handleSubmit}>
+                        <div style={{marginTop: "5%"}}>
+                            <div className="input-group mb-3">
+
+                                <input className="form-control"  type="text" aria-label="Search" value={this.state.ip}
+                                        onChange={this.handleSearch}/>
+                                <div className="input-group-append">
 
                                     <button
-                                            className="btn btn-outline-success btn-rounded btn-sm"
-                                            type="submit">search
+                                        className="btn btn-outline-success btn-rounded btn-sm"
+                                        type="submit">search
                                     </button>
-                                    </div>
-                                        </div>
-
-                                </div>
-                                <div style={{marginLeft: "5%", marginTop: "5%"}}>
-
-                                    <button style={{fontSize: "15px", marginLeft: "5%", marginTop: "5%"}}
-                                            className="btn btn-outline-info btn-rounded btn-sm my-md-n2"
-                                            type="submit" onClick={this.getIp}>Use my current IP
-                                    </button>
-                                    <button style={{fontSize: "15px", marginLeft: "5%", marginTop: "5%"}}
-                                            className="btn btn-outline-info btn-rounded btn-sm my-md-n2"
-                                            type="submit" onClick={this.getLocation}>Get Location
-                                    </button>
-                                </div>
-                            </form>
-
-                        </div>
-                    )
-                }
-                {
-                    this.state.displayWeather &&
-
-                    (
-                        <div>
-                            <div className="upper-section">
-                                <div className="back-and-city">
-                                    <BackArrow size={35} onClick={() => {
-                                        this.setState({displayWeather: false})
-                                    }}/>
-
                                 </div>
                             </div>
 
-                            <div className="search-container">latitude: {this.state.longitude} ,
-                                longitude: {this.state.latitude}</div>
-                            <div>
-                                <Clipboard option-text={this.getText} onSuccess={this.onSuccess}>
-                                    copy to clipboard
-                                </Clipboard>
-                            </div>
-
-
                         </div>
-                    )
-                }
+                        <div style={{marginLeft: "5%", marginTop: "5%"}}>
+                            <button style={{fontSize: "15px", marginLeft: "5%", marginTop: "5%"}}
+                                    className="btn btn-outline-info btn-rounded btn-sm my-md-n2"
+                                    type="submit" onClick={this.getLocation}>Get Location
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+
             </div>
+
         );
     }
 }

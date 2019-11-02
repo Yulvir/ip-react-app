@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 
 const mapStyles = {
 width: '100%',
-height: '80%'
+height: '95%'
 };
 
 export class GoogleMapContainer extends Component  {
@@ -50,13 +50,12 @@ export class GoogleMapContainer extends Component  {
      onClick={() => console.log("You clicked me!")} />
     })
   }
-
   render() {
     return (
 
         <Map
           google={this.props.google}
-          zoom={8}
+          zoom={15}
           style={mapStyles}
           center={this.state.initialLocation}
           initialCenter={this.state.initialLocation}

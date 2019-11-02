@@ -39,29 +39,59 @@ export class ResultsContent extends Component {
   displayMarkers = () => {
     const locationObject = this.props.latLon;
     console.log(locationObject);
+
+
     return [this.state.items].map((store, index) => {
-      return  ([<td> {store.cityName} </td>,
-              <td> {store.continentName} </td>,
-              <td> {store.countryName} </td>,
-              <td> {store.postalCode} </td>,
-              <td> {store.timeZone} </td>])
+      return  ([
+
+
+          <li className="list-group-item d-flex justify-content-between align-items-center">
+            Latitude
+           <h4> <span className="badge badge-primary badge-pill">{store.latitude}</span></h4>
+          </li>,
+          <li className="list-group-item d-flex justify-content-between align-items-center">
+            Longitude
+           <h4> <span className="badge badge-primary badge-pill">{store.longitude}</span></h4>
+          </li>,
+          <li className="list-group-item d-flex justify-content-between align-items-center">
+            City
+            <h4><span className="badge badge-primary badge-pill ">{store.cityName}</span></h4>
+          </li>,
+
+        <li className="list-group-item d-flex justify-content-between align-items-center">
+            Continent
+          <h4>  <span className="badge badge-primary badge-pill">{store.continentName}</span></h4>
+          </li>,
+
+        <li className="list-group-item d-flex justify-content-between align-items-center">
+            Country
+          <h4>  <span className="badge badge-primary badge-pill">{store.countryName}</span></h4>
+          </li>,
+
+        <li className="list-group-item d-flex justify-content-between align-items-center">
+            Postal Code
+         <h4>   <span className="badge badge-primary badge-pill">{store.postalCode}</span></h4>
+          </li>,
+
+        <li className="list-group-item d-flex justify-content-between align-items-center">
+            Time Zone
+          <h4>  <span className="badge badge-primary badge-pill">{store.timeZone}</span></h4>
+          </li>,
+      ])
+
     })
   }
 
+
+
   render() {
     return (
-      <table className="table-results">
-      <tr>
-        <th>City</th>
-        <th>Continent</th>
-        <th>Country</th>
-        <th>Postal Code</th>
-        <th>Time Zone</th>
-      </tr>
-      <tr>
+      <ul className="list-group">
+
       {this.displayMarkers()}
-      </tr>
-    </table>
+
+
+    </ul>
     );
   }
 }
