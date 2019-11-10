@@ -36,7 +36,7 @@ export class ResultsContent extends Component {
     });
   }
 
-  displayMarkers = () => {
+  displayResults = () => {
     const locationObject = this.props.latLon;
     console.log(locationObject);
 
@@ -88,7 +88,7 @@ export class ResultsContent extends Component {
     return (
       <ul className="list-group">
 
-      {this.displayMarkers()}
+      {this.displayResults()}
 
 
     </ul>

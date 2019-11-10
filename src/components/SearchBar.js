@@ -23,13 +23,14 @@ class SearchBar extends Component {
         this.state = {
             latitude: '',
             longitude: '',
-            ip: '72.82.110.100',
             displayWeather: false,
             ipNotValid: false
         };
 
         this.onSuccess = this.onSuccess.bind(this);
         this.getText = this.getText.bind(this);
+        this.getIp();
+
     }
 
 
@@ -54,7 +55,9 @@ class SearchBar extends Component {
     //get current location of user and call the API
     getLocation = () => {
         const showPosition = (position) => {
-            console.log(position)
+            console.log(position);
+            console.log("popo");
+
             this.setState({
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude,
@@ -62,7 +65,7 @@ class SearchBar extends Component {
             });
             this.props.setLocationSearch(this.state);
 
-        }
+        };
 
         console.log("user latitude is" + this.state.longitude);
         console.log("user longitude is" + this.state.latitude);
@@ -72,12 +75,8 @@ class SearchBar extends Component {
         } else {
             alert("Current location is not supported by this browser");
         }
-    }
-    validateIPaddress = (ipaddress) => {
-
-        alert("You have entered an invalid IP address!");
-        return false
     };
+
     //update state with search value
     handleSearch = (event) => {
 
@@ -101,6 +100,7 @@ class SearchBar extends Component {
 
     //submit a GET request
     handleSubmit = (e) => {
+        console.log("caca");
         e.preventDefault();
         const loc = this.state.ip;
         this.axiosGETreq(loc);
@@ -115,7 +115,7 @@ class SearchBar extends Component {
 
 
     axiosGETreq = (IP) => {
-        axios.get(`http://localhost:5000?ip=${IP}`)
+        axios.get(`http://52.31.25.236:5000?ip=${IP}`)
             .then(res => {
                 const weatherData = {
                     longitude: res.data.location.longitude,
@@ -128,7 +128,7 @@ class SearchBar extends Component {
                     postalCode: res.data.postal.code,
                     timeZone: res.data.location.time_zone,
 
-                }
+                };
 
                 this.setState(weatherData);
 
@@ -154,9 +154,8 @@ class SearchBar extends Component {
                 longitude: cachedData.longitude,
                 ip: cachedData.ip
             });
-            this.getIp()
         }
-    }
+    };
 
 
     onSuccess() {
@@ -188,8 +187,9 @@ class SearchBar extends Component {
                         <div style={{marginTop: "5%"}}>
                             <div className="input-group mb-3">
 
-                                <input className="form-control" type="text" aria-label="Search" placeholder={"Your current IP \t ==> \t" + this.state.ip}
-                                        onChange={this.handleSearch}/>
+                                <input className="form-control" type="text" aria-label="Search"
+                                       placeholder={"Your current IP \t ==> \t" + this.state.ip}
+                                       onChange={this.handleSearch}/>
                                 <div className="input-group-append">
 
                                     <button
@@ -200,14 +200,21 @@ class SearchBar extends Component {
                             </div>
 
                         </div>
-                        <div style={{marginLeft: "5%", marginTop: "5%"}}>
-                            <button style={{fontSize: "15px", marginLeft: "5%", marginTop: "5%"}}
-                                    className="btn btn-outline-info btn-rounded btn-sm my-md-n2"
-                                    type="submit" onClick={this.getLocation}>Get Location
-                            </button>
-                        </div>
+
                     </form>
 
+                    <div style={{marginLeft: "5%", marginTop: "5%"}}>
+                        <button style={{fontSize: "15px", marginLeft: "5%", marginTop: "5%"}}
+                                className="btn btn-outline-info btn-rounded btn-sm my-md-n2"
+                                type="submit" onClick={this.getLocation}>Get Location
+                        </button>
+                    </div>
+                    <div style={{marginLeft: "5%", marginTop: "5%"}}>
+                        <button style={{fontSize: "15px", marginLeft: "5%", marginTop: "5%"}}
+                                className="btn btn-outline-info btn-rounded btn-sm my-md-n2"
+                                type="submit" onClick={this.getIp}>Use my ip
+                        </button>
+                    </div>
                 </div>
 
             </div>
