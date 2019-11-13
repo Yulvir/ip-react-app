@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 
 const mapStyles = {
 width: '100%',
-height: '95%'
+height: '100%'
 };
 
 export class GoogleMapContainer extends Component  {
