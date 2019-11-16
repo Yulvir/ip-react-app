@@ -54,7 +54,7 @@ export class ResultsContent extends Component {
            <h4> <span className="badge badge-primary badge-pill">{store.longitude}</span></h4>
           </li>,
           <li className="list-group-item d-flex justify-content-between align-items-center">
-            City
+              City
             <h4><span className="badge badge-primary badge-pill ">{store.cityName}</span></h4>
           </li>,
 

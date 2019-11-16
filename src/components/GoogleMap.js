@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
 };
 
 
-const mapStyles = {
+let mapStyles = {
 width: '100%',
 height: '100%'
 };
@@ -22,6 +22,8 @@ export class GoogleMapContainer extends Component  {
        items: [],
        initialLocation: {lat: -3, lng: 40}
      };
+
+
 
      store.subscribe(() => {
        // When state will be updated(in our case, when items will be fetched),
@@ -39,6 +41,22 @@ export class GoogleMapContainer extends Component  {
 
   }
 
+    componentDidMount() {
+        this.updateDimensions();
+        window.addEventListener("resize", this.updateDimensions);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.updateDimensions);
+    }
+
+    updateDimensions = () => {
+        let windowWidth = typeof window !== "undefined" ? window.innerWidth : 0;
+        let windowHeight = typeof window !== "undefined" ? window.innerHeight : 0;
+        console.log(windowHeight);
+        console.log(windowWidth);
+        this.setState({windowWidth: windowWidth, windowHeight: windowHeight});
+    }
   displayMarkers = () => {
     const locationObject = this.props.latLon;
     console.log(this.state.initialLocation);
