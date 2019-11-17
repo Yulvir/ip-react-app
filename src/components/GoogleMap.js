@@ -10,8 +10,10 @@ const mapStateToProps = (state) => {
 
 
 let mapStyles = {
-width: '100%',
-height: '100%'
+    maxWidth: '100vw',
+    height:'auto',
+    width:'auto',
+   maxHeigh:'100vh'
 };
 
 export class GoogleMapContainer extends Component  {
@@ -23,6 +25,8 @@ export class GoogleMapContainer extends Component  {
        initialLocation: {lat: -3, lng: 40}
      };
 
+    const mapHeight = window.innerHeight;
+    console.log("printing heiht" + mapHeight);
 
 
      store.subscribe(() => {

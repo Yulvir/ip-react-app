@@ -7,8 +7,6 @@ import store from "./js/store/index";
 import {ConnectedGoogleMapContainer} from './components/GoogleMap.js';
 import SearchBarForm from "./components/SearchBar";
 import {ResultsContent} from "./components/ResultsContent";
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
-import { Router, Route, browserHistory } from 'react-router'
 import App from "./components/App";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -42,9 +40,13 @@ import Header from "./components/Header";
 ReactDOM.render(
   <Provider store={store}>
   <App/>
-  </Provider>, document.getElementById('root')
+  </Provider>, document.getElementById('ip-app')
 
-);ReactDOM.render(
+);
+
+
+
+ReactDOM.render(
   <Provider store={store}>
   <Header/>
   </Provider>, document.getElementById('header')

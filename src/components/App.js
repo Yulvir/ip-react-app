@@ -51,14 +51,15 @@ class App extends Component {
                             <h4 className="my-0 font-weight-lighter">Google Map</h4>
                         </div>
 
-                        <div className="embed-responsive embed-responsive-1by1">
 
-                            <div className="embed-responsive-item">
+                            <div className="embed-responsive embed-responsive-1by1">
+                                <div className="embed-responsive-item">
                             <Provider store={store}>
                               <ConnectedGoogleMapContainer/>
                               </Provider>
                             </div>
-                        </div>
+                            </div>
+
                     </div>
                     <img src={banner} alt="Italian Trulli"/>
 

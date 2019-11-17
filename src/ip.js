@@ -1,14 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Test from './components/Test';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from "react-redux";
 import store from "./js/store/index";
 import {ConnectedGoogleMapContainer} from './components/GoogleMap.js';
 import SearchBarForm from "./components/SearchBar";
 import {ResultsContent} from "./components/ResultsContent";
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
-import { Router, Route, browserHistory } from 'react-router'
 
 
 

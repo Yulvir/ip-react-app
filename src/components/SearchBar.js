@@ -115,7 +115,7 @@ class SearchBar extends Component {
 
 
     axiosGETreq = (IP) => {
-        axios.get(`http://52.31.25.236:5000?ip=${IP}`)
+        axios.get(`http://127.0.0.1:5000?ip=${IP}`)
             .then(res => {
                 const weatherData = {
                     longitude: res.data.location.longitude,
