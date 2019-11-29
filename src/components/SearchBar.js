@@ -100,7 +100,6 @@ class SearchBar extends Component {
 
     //submit a GET request
     handleSubmit = (e) => {
-        console.log("caca");
         e.preventDefault();
         const loc = this.state.ip;
         this.axiosGETreq(loc);
@@ -118,15 +117,15 @@ class SearchBar extends Component {
         axios.get(`http://127.0.0.1:5000?ip=${IP}`)
             .then(res => {
                 const weatherData = {
-                    longitude: res.data.location.longitude,
-                    latitude: res.data.location.latitude,
+                    longitude: res.data.match.location.longitude,
+                    latitude: res.data.match.location.latitude,
                     ip: IP,
                     displayWeather: true,
-                    cityName: res.data.city.names.en,
-                    continentName: res.data.continent.names.en,
-                    countryName: res.data.country.names.en,
-                    postalCode: res.data.postal.code,
-                    timeZone: res.data.location.time_zone,
+                    cityName: res.data.match.city.names.en,
+                    continentName: res.data.match.continent.names.en,
+                    countryName: res.data.match.country.names.en,
+                    postalCode: res.data.match.postal.code,
+                    timeZone: res.data.match.location.time_zone,
 
                 };
 
@@ -139,7 +138,7 @@ class SearchBar extends Component {
             .catch(error => {
                 console.log(error);
                 this.state.ipNotValid = !this.state.ipNotValid
-                console.log(this.state.ipNotValid);
+                console.log(this.state.ipNotValid.toString());
             });
     }
 
