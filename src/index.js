@@ -15,28 +15,6 @@ import Header from "./components/Header";
 // https://www.valentinog.com/blog/redux/
 
 
-//
-// ReactDOM.render(
-//
-//   <Provider store={store}>
-//   <ConnectedGoogleMapContainer/>
-//   </Provider>, document.getElementById('map-google')
-//
-// );
-// ReactDOM.render(
-//   <Provider store={store}>
-//   <ResultsContent/>
-//   </Provider>, document.getElementById('results-content')
-//
-// );
-//
-// ReactDOM.render(
-//   <Provider store={store}>
-//   <SearchBarForm/>
-//   </Provider>, document.getElementById('search-bar')
-//
-// );
-
 ReactDOM.render(
   <Provider store={store}>
   <App/>

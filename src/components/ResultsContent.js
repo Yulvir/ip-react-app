@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Toggle from 'react-toggle';
-import Clipboard from 'react-clipboard.js';
 import Search from 'react-icons/lib/md/search';
 import BackArrow from 'react-icons/lib/md/arrow-back';
 import 'weather-icons/css/weather-icons.css';
@@ -43,8 +42,6 @@ export class ResultsContent extends Component {
 
     return [this.state.items].map((store, index) => {
       return  ([
-
-
           <li className="list-group-item d-flex justify-content-between align-items-center">
             Latitude
            <h4> <span className="badge badge-primary badge-pill">{store.latitude}</span></h4>

@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import Toggle from 'react-toggle';
-import Clipboard from 'react-clipboard.js';
 import Search from 'react-icons/lib/md/search';
 import BackArrow from 'react-icons/lib/md/arrow-back';
 import 'weather-icons/css/weather-icons.css';
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {setLocationSearch} from "../js/actions/latitude-longitude-action";
 import publicIP from 'react-native-public-ip';
-
+import {ConnectedClipboardIP} from './ClipboardIP'
+import store from "../js/store";
+import Header from "./Header";
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -23,8 +24,11 @@ class SearchBar extends Component {
         this.state = {
             latitude: '',
             longitude: '',
-            displayWeather: false,
-            ipNotValid: false
+            displayResults: false,
+            ipNotValid: false,
+            ownIp: "",
+            locationAsked: false
+
         };
 
         this.onSuccess = this.onSuccess.bind(this);
@@ -38,9 +42,11 @@ class SearchBar extends Component {
 
         publicIP()
             .then(ip => {
-                console.log(ip)
-                this.state.ip = ip
-                this.handleSubmitCurrentIp(this.state);
+                console.log(ip);
+                this.state.ownIp = ip;
+                //this.handleSubmitCurrentIp(this.state);
+                this.props.setLocationSearch(this.state);
+                localStorage.setItem('data', JSON.stringify(this.state));
                 console.log(ip)
                 // '47.122.71.234'
             })
@@ -54,14 +60,16 @@ class SearchBar extends Component {
 
     //get current location of user and call the API
     getLocation = () => {
+
+
         const showPosition = (position) => {
             console.log(position);
-            console.log("popo");
 
             this.setState({
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude,
-                displayWeather: true,
+                displayResults: true,
+                locationAsked: true
             });
             this.props.setLocationSearch(this.state);
 
@@ -79,7 +87,7 @@ class SearchBar extends Component {
 
     //update state with search value
     handleSearch = (event) => {
-
+        this.state.locationAsked = false;
         if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(event.target.value)) {
 
             this.setState({
@@ -100,7 +108,6 @@ class SearchBar extends Component {
 
     //submit a GET request
     handleSubmit = (e) => {
-        console.log("caca");
         e.preventDefault();
         const loc = this.state.ip;
         this.axiosGETreq(loc);
@@ -118,15 +125,15 @@ class SearchBar extends Component {
         axios.get(`http://127.0.0.1:5000?ip=${IP}`)
             .then(res => {
                 const weatherData = {
-                    longitude: res.data.location.longitude,
-                    latitude: res.data.location.latitude,
+                    longitude: res.data.match.location.longitude,
+                    latitude: res.data.match.location.latitude,
                     ip: IP,
-                    displayWeather: true,
-                    cityName: res.data.city.names.en,
-                    continentName: res.data.continent.names.en,
-                    countryName: res.data.country.names.en,
-                    postalCode: res.data.postal.code,
-                    timeZone: res.data.location.time_zone,
+                    displayResults: true,
+                    cityName: res.data.match.city.names.en,
+                    continentName: res.data.match.continent.names.en,
+                    countryName: res.data.match.country.names.en,
+                    postalCode: res.data.match.postal.code,
+                    timeZone: res.data.match.location.time_zone,
 
                 };
 
@@ -152,7 +159,8 @@ class SearchBar extends Component {
             this.setState({
                 latitude: cachedData.latitude,
                 longitude: cachedData.longitude,
-                ip: cachedData.ip
+                ip: cachedData.ip,
+                ownIp: cachedData.ownIp
             });
         }
     };
@@ -181,7 +189,9 @@ class SearchBar extends Component {
                     )
                 }
 
-
+                <ConnectedClipboardIP store={store}>
+                  <Header/>
+                  </ConnectedClipboardIP>
                 <div>
                     <form onSubmit={this.handleSubmit}>
                         <div style={{marginTop: "5%"}}>
@@ -206,15 +216,10 @@ class SearchBar extends Component {
                     <div style={{marginLeft: "5%", marginTop: "5%"}}>
                         <button style={{fontSize: "15px", marginLeft: "5%", marginTop: "5%"}}
                                 className="btn btn-outline-info btn-rounded btn-sm my-md-n2"
-                                type="submit" onClick={this.getLocation}>Get Location
+                                type="submit" onClick={this.getLocation}>Get Location from Browser
                         </button>
                     </div>
-                    <div style={{marginLeft: "5%", marginTop: "5%"}}>
-                        <button style={{fontSize: "15px", marginLeft: "5%", marginTop: "5%"}}
-                                className="btn btn-outline-info btn-rounded btn-sm my-md-n2"
-                                type="submit" onClick={this.getIp}>Use my ip
-                        </button>
-                    </div>
+
                 </div>
 
             </div>
