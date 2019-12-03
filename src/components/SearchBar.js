@@ -80,6 +80,8 @@ class SearchBar extends Component {
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
+            this.axiosGetLocationInfo()
+
         } else {
             alert("Current location is not supported by this browser");
         }
@@ -150,7 +152,35 @@ class SearchBar extends Component {
             });
     }
 
+    axiosGetLocationInfo = (IP) => {
 
+
+   const location = {
+      lat: this.state.latitude,
+      lon: this.state.longitude
+    };
+        axios.post(`http://127.0.0.1:5000/location_info`, { location })
+            .then(res => {
+                const weatherData = {
+                    displayResults: true,
+                    cityName: res.data.location_info.city,
+                    continentName: "",
+                    countryName: res.data.location_info.country,
+                    postalCode: res.data.location_info.postcode,
+                    timeZone: res.data.location_info.time_zone
+                };
+                this.setState(weatherData);
+
+                this.props.setLocationSearch(this.state);
+
+                localStorage.setItem('data', JSON.stringify(weatherData));
+            })
+            .catch(error => {
+                console.log(error);
+                this.state.ipNotValid = !this.state.ipNotValid;
+                console.log(this.state.ipNotValid);
+            });
+    };
     componentWillMount = () => {
         const cachedData = JSON.parse(localStorage.getItem('data'));
 
