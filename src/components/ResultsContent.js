@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import Toggle from 'react-toggle';
-import Search from 'react-icons/lib/md/search';
-import BackArrow from 'react-icons/lib/md/arrow-back';
 import 'weather-icons/css/weather-icons.css';
 import store from '../js/store/index'
 import {connect} from "react-redux";
-
-
 
 const mapStateToProps = (state) => {
   return { locationObject: state };
@@ -23,20 +17,20 @@ export class ResultsContent extends Component {
     store.subscribe(() => {
       // When state will be updated(in our case, when items will be fetched),
       // we will update local component state and force component to rerender
-      // with new data.
-     console.log(store.getState().latLon);
+      // with new locationInfo.
+     console.log(store.getState().locationInfo);
       this.setState({
-        items: store.getState().latLon,
+        items: store.getState().locationInfo,
         initialLocation: {
-          lat: store.getState().latLon.latitude,
-          lng: store.getState().latLon.longitude
+          lat: store.getState().locationInfo.latitude,
+          lng: store.getState().locationInfo.longitude
         }
       });
     });
   }
 
   displayResults = () => {
-    const locationObject = this.props.latLon;
+    const locationObject = this.props.locationInfo;
     console.log(locationObject);
 
 

@@ -33,12 +33,12 @@ export class GoogleMapContainer extends Component  {
        // When state will be updated(in our case, when items will be fetched),
        // we will update local component state and force component to rerender
        // with new data.
-      console.log(store.getState().latLon);
+      console.log(store.getState().locationInfo);
        this.setState({
-         items: store.getState().latLon,
+         items: store.getState().locationInfo,
          initialLocation: {
-           lat: store.getState().latLon.latitude,
-           lng: store.getState().latLon.longitude
+           lat: store.getState().locationInfo.latitude,
+           lng: store.getState().locationInfo.longitude
          }
        });
      });
@@ -62,7 +62,7 @@ export class GoogleMapContainer extends Component  {
         this.setState({windowWidth: windowWidth, windowHeight: windowHeight});
     }
   displayMarkers = () => {
-    const locationObject = this.props.latLon;
+    const locationObject = this.props.locationInfo;
     console.log(this.state.initialLocation);
     return [this.state.items].map((store, index) => {
       return <Marker key={index} id={index} position={{

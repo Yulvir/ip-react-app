@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
-
-import ReactDOM from 'react-dom';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import store from "../js/store";
 
@@ -12,23 +10,19 @@ const mapStateToProps = (state) => {
 };
 
 class ClipboardIP extends React.Component {
-    constructor(props) {
+    constructor(props){
     super(props);
 
     this.state = {
-      items: []
-    }
+      ownIpItems: []
+    };
     store.subscribe(() => {
       // When state will be updated(in our case, when items will be fetched),
       // we will update local component state and force component to rerender
       // with new data.
-     console.log(store.getState().latLon);
+     console.log(store.getState().ownIpInfo);
       this.setState({
-        items: store.getState().latLon,
-        initialLocation: {
-          lat: store.getState().latLon.latitude,
-          lng: store.getState().latLon.longitude
-        }
+        ownIpItems: store.getState().ownIpInfo,
       });
     });
 
@@ -38,7 +32,7 @@ class ClipboardIP extends React.Component {
     console.log(locationObject);
 
 
-    return [this.state.items].map((store, index) => {
+    return [this.state.ownIpItems].map((store, index) => {
       return  ([
 
 
@@ -52,7 +46,7 @@ class ClipboardIP extends React.Component {
       ])
 
     })
-  }
+  };
   render() {
     return (
       <div>
