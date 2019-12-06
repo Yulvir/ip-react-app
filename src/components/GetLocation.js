@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import 'weather-icons/css/weather-icons.css';
 import {connect, Provider} from "react-redux";
-import {setLocationSearch} from "../js/actions/latitude-longitude-action";
+import {setLocationInfo} from "../js/actions/latitude-longitude-action";
 import store from "../js/store";
 
 function mapDispatchToProps(dispatch) {
     return {
-        setLocationSearch: output => dispatch(setLocationSearch(output))
+        setLocationInfo: output => dispatch(setLocationInfo(output))
     };
 }
 
@@ -17,7 +17,6 @@ class GetLocation extends Component {
         super(props);
         this.state = {
             latitude: '',
-            displayResults: true,
             longitude: '',
         };
     }
@@ -29,10 +28,9 @@ class GetLocation extends Component {
             console.log(position);
             this.setState({
                 latitude: position.coords.latitude,
-                displayResults: true,
                 longitude: position.coords.longitude,
             });
-            this.props.setLocationSearch(this.state);
+            this.props.setLocationInfo(this.state);
 
         };
 
@@ -69,7 +67,7 @@ class GetLocation extends Component {
                 };
                 this.setState(locationData);
 
-                this.props.setLocationSearch(locationData);
+                this.props.setLocationInfo(locationData);
 
                 localStorage.setItem('data', JSON.stringify(locationData));
             })

@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import 'weather-icons/css/weather-icons.css';
 import {connect, Provider} from "react-redux";
-import {setLocationSearch} from "../js/actions/latitude-longitude-action";
+import {setLocationInfo} from "../js/actions/latitude-longitude-action";
 import store from "../js/store";
 import {setIpSearch} from "../js/actions/ip-action";
+import publicIP from "react-native-public-ip";
 function mapDispatchToProps(dispatch) {
     return {
-        setIpSearch: output => dispatch(setIpSearch(output))
+        setLocationInfo: output => dispatch(setLocationInfo(output))
     };
 }
 
@@ -19,9 +20,9 @@ class IpSearchHandle extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            displayResults: true,
             ipNotValid: false,
-            items: [],
+            ownIpItems: [],
+            ipItems: [],
         };
 
         store.subscribe(() => {
@@ -32,12 +33,28 @@ class IpSearchHandle extends Component {
             ownIpItems: store.getState().ownIpInfo,
             ipItems: store.getState().ipInfo
       });
+
     });
 
 
-    }
+        }
 
+     getIp = () => {
 
+            publicIP()
+                .then(ip => {
+                    console.log(ip);
+                    this.setState({ownIp: ip});
+                    this.props.setOwnIp({ownIp: ip});
+                    localStorage.setItem('data', JSON.stringify(this.state));
+                    console.log(ip)
+                })
+                .catch(error => {
+                    console.log(error);
+                    // 'Unable to get IP address.'
+                });
+
+        };
     //update state with search value
     handleSearch = (event) => {
         if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(event.target.value)) {
@@ -55,11 +72,14 @@ class IpSearchHandle extends Component {
 
     };
 
+
+    requestIpInfo = (ip) => {
+        this.axiosGETreq(ip);
+    };
+
     //submit a GET request
     handleSubmit = (e) => {
-        e.preventDefault();
-        const loc = this.state.ip;
-        this.axiosGETreq(loc);
+        this.requestIpInfo(this.state.ip)
     };
 
     componentWillMount = () => {
@@ -72,38 +92,40 @@ class IpSearchHandle extends Component {
                 ownIp: cachedData.ownIp
             });
         }
+
+    };
+    componentDidMount() {
+        this.getIp();
+        if(this.state.ownIp) {
+            this.requestIpInfo(this.state.ownIp)
+        }
+    }
+
+    axiosGETreq = async(IP) => {
+        let res = await axios.get(`http://127.0.0.1:5000?ip=${IP}`);
+
+        const locationData = {
+            longitude: res.data.match.location.longitude,
+            latitude: res.data.match.location.latitude,
+            ip: IP,
+            cityName: res.data.match.city.names.en,
+            continentName: res.data.match.continent.names.en,
+            countryName: res.data.match.country.names.en,
+            postalCode: res.data.match.postal.code,
+            timeZone: res.data.match.location.time_zone,
+
+        };
+
+        this.setState(locationData);
+
+        this.props.setLocationInfo(locationData);
+
+        localStorage.setItem('data', JSON.stringify(locationData));
+
     };
 
 
-    axiosGETreq = (IP) => {
-        axios.get(`http://127.0.0.1:5000?ip=${IP}`)
-            .then(res => {
-                const locationData = {
-                    longitude: res.data.match.location.longitude,
-                    latitude: res.data.match.location.latitude,
-                    ip: IP,
-                    displayResults: true,
-                    cityName: res.data.match.city.names.en,
-                    continentName: res.data.match.continent.names.en,
-                    countryName: res.data.match.country.names.en,
-                    postalCode: res.data.match.postal.code,
-                    timeZone: res.data.match.location.time_zone,
-
-                };
-
-                this.setState(locationData);
-
-                this.props.setIpSearch(this.state);
-
-                localStorage.setItem('data', JSON.stringify(locationData));
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
-
-
-  displayInput = () => {
+    displayInput = () => {
 
     return [this.state.ownIpItems].map((store, index) => {
       return  (

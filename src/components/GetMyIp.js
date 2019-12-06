@@ -4,7 +4,7 @@ import 'weather-icons/css/weather-icons.css';
 import {connect, Provider} from "react-redux";
 import {setIpSearch, setOwnIp} from "../js/actions/ip-action";
 import store from "../js/store";
-import publicIP from "react-native-public-ip";
+const publicIp = require('public-ip');
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -25,24 +25,19 @@ class GetMyIP extends Component {
     }
 
     componentDidMount() {
-                this.getIp();
+        this.getIp().then(r => this.props.setOwnIp({ownIp: r}))
     }
 
-    getIp = () => {
+    getIp = async () => {
 
-        publicIP()
-            .then(ip => {
-                console.log(ip);
-                this.setState({ownIp: ip});
-                this.props.setOwnIp({ownIpItems: ip});
-                localStorage.setItem('data', JSON.stringify(this.state));
-                console.log(ip)
-            })
-            .catch(error => {
-                console.log(error);
-                // 'Unable to get IP address.'
-            });
-        publicIP()
+        const ipv4 = await publicIp.v4() || "";
+        console.log(ipv4);
+        this.setState({ownIp: ipv4});
+        localStorage.setItem('data', JSON.stringify(this.state));
+        console.log(ipv4)
+
+        return ipv4
+
     };
 
     componentWillMount = () => {

@@ -5,7 +5,7 @@ import Search from 'react-icons/lib/md/search';
 import BackArrow from 'react-icons/lib/md/arrow-back';
 import 'weather-icons/css/weather-icons.css';
 import {connect, Provider} from "react-redux";
-import {setLocationSearch} from "../js/actions/latitude-longitude-action";
+import {setLocationInfo} from "../js/actions/latitude-longitude-action";
 import publicIP from 'react-native-public-ip';
 import {ConnectedClipboardIP} from './ClipboardIP'
 import store from "../js/store";
@@ -16,7 +16,7 @@ import GetMyIPForm from "./GetMyIp";
 
 function mapDispatchToProps(dispatch) {
     return {
-        setLocationSearch: output => dispatch(setLocationSearch(output))
+        setLocationInfo: output => dispatch(setLocationInfo(output))
     };
 }
 
@@ -59,11 +59,9 @@ class SearchBar extends Component {
                 <GetMyIPForm store={store}/>
                 <ConnectedClipboardIP store={store}/>
 
-                <div>
-                    <IpSearchHandleForm store={store}/>
-                    <GetLocationForm store={store}/>
-                </div>
+                <IpSearchHandleForm store={store}/>
 
+                <GetLocationForm store={store}/>
             </div>
 
         );
