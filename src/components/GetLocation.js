@@ -24,13 +24,19 @@ class GetLocation extends Component {
 
     //get current location of user and call the API
     getLocation = () => {
-        const showPosition = (position) => {
+        const getPosition = (position) => {
             console.log(position);
             this.setState({
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude,
             });
-            this.props.setLocationInfo(this.state);
+               const location = {
+                  lat: position.coords.latitude,
+                  lon: position.coords.longitude,
+                };
+
+
+            this.axiosGetLocationInfo(location)
 
         };
 
@@ -38,8 +44,7 @@ class GetLocation extends Component {
         console.log("user longitude is" + this.state.latitude);
 
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-            this.axiosGetLocationInfo()
+            navigator.geolocation.getCurrentPosition(getPosition);
 
         } else {
             alert("Current location is not supported by this browser");
@@ -47,12 +52,8 @@ class GetLocation extends Component {
     };
 
 
-    axiosGetLocationInfo = () => {
+    axiosGetLocationInfo = (location) => {
 
-   const location = {
-      lat: this.state.latitude,
-      lon: this.state.longitude
-    };
 
         axios.post(`http://127.0.0.1:5000/location_info`, { location })
             .then(res => {
@@ -66,9 +67,7 @@ class GetLocation extends Component {
                         longitude: this.state.longitude
                 };
                 this.setState(locationData);
-
                 this.props.setLocationInfo(locationData);
-
                 localStorage.setItem('data', JSON.stringify(locationData));
             })
             .catch(error => {

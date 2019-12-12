@@ -21,12 +21,10 @@ class GetMyIP extends Component {
         items: [],
         ownIp: ""
     };
-
-    }
-
-    componentDidMount() {
         this.getIp().then(r => this.props.setOwnIp({ownIp: r}))
     }
+
+
 
     getIp = async () => {
 
@@ -34,7 +32,7 @@ class GetMyIP extends Component {
         console.log(ipv4);
         this.setState({ownIp: ipv4});
         localStorage.setItem('data', JSON.stringify(this.state));
-        console.log(ipv4)
+        console.log(ipv4);
 
         return ipv4
 

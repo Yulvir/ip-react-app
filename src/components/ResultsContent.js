@@ -13,7 +13,7 @@ export class ResultsContent extends Component {
     super(props);
     this.state = {
       items: []
-    }
+    };
     store.subscribe(() => {
       // When state will be updated(in our case, when items will be fetched),
       // we will update local component state and force component to rerender
@@ -21,10 +21,6 @@ export class ResultsContent extends Component {
      console.log(store.getState().locationInfo);
       this.setState({
         items: store.getState().locationInfo,
-        initialLocation: {
-          lat: store.getState().locationInfo.latitude,
-          lng: store.getState().locationInfo.longitude
-        }
       });
     });
   }

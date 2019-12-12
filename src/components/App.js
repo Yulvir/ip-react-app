@@ -2,20 +2,45 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import {ConnectedGoogleMapContainer} from './GoogleMap.js';
-import SearchedIp from './SearchedIp.js';
 import SearchBarForm from './SearchBar.js';
 
 import {ConnectedResultsContent} from './ResultsContent.js';
 import banner from './assets/img/81AyedcV+vL._SY550_.jpg'; // Tell Webpack this JS file uses this image
 import logo from './assets/img/logo.png';
 import store from "../js/store";
-import {Provider} from "react-redux"; // Tell Webpack this JS file uses this image
+import {connect, Provider} from "react-redux";
+import {setOwnIp} from "../js/actions/ip-action"; // Tell Webpack this JS file uses this image
+const publicIp = require('public-ip');
+
+function mapDispatchToProps(dispatch) {
+    return {
+        setOwnIp: output => dispatch(setOwnIp(output))
+    };
+}
 
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
+      constructor(props) {
+        super(props);
+
+
+      }
+    componentDidMount() {
+                  this.getIp().then(r => this.props.setOwnIp({ownIp: r}))
+
+    }
+
+    getIp = async () => {
+
+            const ipv4 = await publicIp.v4() || "";
+            console.log(ipv4);
+            this.setState({ownIp: ipv4});
+            localStorage.setItem('data', JSON.stringify(this.state));
+            console.log(ipv4);
+
+            return ipv4
+      };
+
 
   render() {
     return (
@@ -71,4 +96,7 @@ class App extends Component {
   }
 }
 
-export default App
+export default connect(
+    null,
+    mapDispatchToProps
+)(App);

@@ -79,6 +79,7 @@ class IpSearchHandle extends Component {
 
     //submit a GET request
     handleSubmit = (e) => {
+        e.preventDefault();
         this.requestIpInfo(this.state.ip)
     };
 
@@ -103,16 +104,16 @@ class IpSearchHandle extends Component {
 
     axiosGETreq = async(IP) => {
         let res = await axios.get(`http://127.0.0.1:5000?ip=${IP}`);
-
+        const nan = "No data";
         const locationData = {
-            longitude: res.data.match.location.longitude,
-            latitude: res.data.match.location.latitude,
+            longitude: res.data.match.location ? res.data.match.location.longitude : nan,
+            latitude: res.data.match.location ? res.data.match.location.latitude : nan,
             ip: IP,
-            cityName: res.data.match.city.names.en,
-            continentName: res.data.match.continent.names.en,
-            countryName: res.data.match.country.names.en,
-            postalCode: res.data.match.postal.code,
-            timeZone: res.data.match.location.time_zone,
+            cityName: res.data.match.city ? res.data.match.city .names.en : nan,
+            continentName: res.data.match.continent ? res.data.match.continent.names.en : nan,
+            countryName: res.data.match.country ? res.data.match.country.names.en : nan,
+            postalCode: res.data.match.postal ? res.data.match.postal.code : nan,
+            timeZone: res.data.match.location ? res.data.match.location.time_zone : nan
 
         };
 
