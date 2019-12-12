@@ -55,7 +55,7 @@ class GetLocation extends Component {
     axiosGetLocationInfo = (location) => {
 
 
-        axios.post(`http://127.0.0.1:5000/location_info`, { location })
+        axios.post(`http://52.31.25.236:5000/location_info`, { location })
             .then(res => {
                 const locationData = {
                         cityName: res.data.location_info.city,
