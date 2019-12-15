@@ -103,7 +103,7 @@ class IpSearchHandle extends Component {
     }
 
     axiosGETreq = async(IP) => {
-        let res = await axios.get(`http://52.31.25.236:5000?ip=${IP}`);
+        let res = await axios.get(`https://getinfoip.com/api/?ip=${IP}`);
         const nan = "No data";
         const locationData = {
             longitude: res.data.match.location ? res.data.match.location.longitude : nan,
