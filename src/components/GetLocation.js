@@ -25,7 +25,6 @@ class GetLocation extends Component {
     //get current location of user and call the API
     getLocation = () => {
         const getPosition = (position) => {
-            console.log(position);
             this.setState({
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude,
@@ -39,9 +38,6 @@ class GetLocation extends Component {
             this.axiosGetLocationInfo(location)
 
         };
-
-        console.log("user latitude is" + this.state.longitude);
-        console.log("user longitude is" + this.state.latitude);
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(getPosition);

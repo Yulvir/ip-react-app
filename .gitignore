@@ -1,4 +1,4 @@
-build/*
+build/
 .idea/
 npm-debug*
 node_modules/

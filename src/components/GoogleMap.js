@@ -26,14 +26,12 @@ export class GoogleMapContainer extends Component  {
      };
 
     const mapHeight = window.innerHeight;
-    console.log("printing heiht" + mapHeight);
 
 
      store.subscribe(() => {
        // When state will be updated(in our case, when items will be fetched),
        // we will update local component state and force component to rerender
        // with new data.
-      console.log(store.getState().locationInfo);
        this.setState({
          items: store.getState().locationInfo,
          initialLocation: {
@@ -57,13 +55,10 @@ export class GoogleMapContainer extends Component  {
     updateDimensions = () => {
         let windowWidth = typeof window !== "undefined" ? window.innerWidth : 0;
         let windowHeight = typeof window !== "undefined" ? window.innerHeight : 0;
-        console.log(windowHeight);
-        console.log(windowWidth);
         this.setState({windowWidth: windowWidth, windowHeight: windowHeight});
     }
   displayMarkers = () => {
     const locationObject = this.props.locationInfo;
-    console.log(this.state.initialLocation);
     return [this.state.items].map((store, index) => {
       return <Marker key={index} id={index} position={{
        lat: store.latitude,

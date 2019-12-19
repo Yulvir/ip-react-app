@@ -22,6 +22,7 @@ function mapDispatchToProps(dispatch) {
 class App extends Component {
       constructor(props) {
         super(props);
+        this.setState({ownIP : ""})
 
 
       }
@@ -33,11 +34,8 @@ class App extends Component {
     getIp = async () => {
 
             const ipv4 = await publicIp.v4() || "";
-            console.log(ipv4);
             this.setState({ownIp: ipv4});
             localStorage.setItem('data', JSON.stringify(this.state));
-            console.log(ipv4);
-
             return ipv4
       };
 

@@ -33,28 +33,12 @@ class IpSearchHandle extends Component {
             ownIpItems: store.getState().ownIpInfo,
             ipItems: store.getState().ipInfo
       });
+          this.state.ownIp = store.getState().ownIpInfo.ownIp;
 
     });
 
-
         }
 
-     getIp = () => {
-
-            publicIP()
-                .then(ip => {
-                    console.log(ip);
-                    this.setState({ownIp: ip});
-                    this.props.setOwnIp({ownIp: ip});
-                    localStorage.setItem('data', JSON.stringify(this.state));
-                    console.log(ip)
-                })
-                .catch(error => {
-                    console.log(error);
-                    // 'Unable to get IP address.'
-                });
-
-        };
     //update state with search value
     handleSearch = (event) => {
         if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(event.target.value)) {
@@ -96,7 +80,6 @@ class IpSearchHandle extends Component {
 
     };
     componentDidMount() {
-        this.getIp();
         if(this.state.ownIp) {
             this.requestIpInfo(this.state.ownIp)
         }

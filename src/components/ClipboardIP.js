@@ -20,7 +20,6 @@ class ClipboardIP extends React.Component {
       // When state will be updated(in our case, when items will be fetched),
       // we will update local component state and force component to rerender
       // with new data.
-     console.log(store.getState().ownIpInfo);
       this.setState({
         ownIpItems: store.getState().ownIpInfo,
       });
@@ -28,10 +27,6 @@ class ClipboardIP extends React.Component {
 
   }
   displayTitle = () => {
-    const locationObject = this.state;
-    console.log(locationObject);
-
-
     return [this.state.ownIpItems].map((store, index) => {
       return  ([
 

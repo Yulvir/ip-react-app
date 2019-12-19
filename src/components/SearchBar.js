@@ -56,7 +56,6 @@ class SearchBar extends Component {
                     )
                 }
 
-                <GetMyIPForm store={store}/>
                 <ConnectedClipboardIP store={store}/>
                 <IpSearchHandleForm store={store}/>
                 <GetLocationForm store={store}/>

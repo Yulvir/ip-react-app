@@ -18,7 +18,6 @@ export class ResultsContent extends Component {
       // When state will be updated(in our case, when items will be fetched),
       // we will update local component state and force component to rerender
       // with new locationInfo.
-     console.log(store.getState().locationInfo);
       this.setState({
         items: store.getState().locationInfo,
       });
@@ -26,9 +25,6 @@ export class ResultsContent extends Component {
   }
 
   displayResults = () => {
-    const locationObject = this.props.locationInfo;
-    console.log(locationObject);
-
 
     return [this.state.items].map((store, index) => {
       return  ([
