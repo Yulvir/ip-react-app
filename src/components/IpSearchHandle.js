@@ -34,8 +34,13 @@ class IpSearchHandle extends Component {
             ipItems: store.getState().ipInfo
       });
           this.state.ownIp = store.getState().ownIpInfo.ownIp;
-
     });
+
+        this.state.ip = this.state.ownIp;
+        if(this.state.ip){
+
+            this.requestIpInfo(this.state.ownIp)
+        }
 
         }
 
@@ -55,7 +60,7 @@ class IpSearchHandle extends Component {
 
 
     };
-
+    // 916 974 154
 
     requestIpInfo = (ip) => {
         this.axiosGETreq(ip);
@@ -76,6 +81,9 @@ class IpSearchHandle extends Component {
                 ip: cachedData.ip,
                 ownIp: cachedData.ownIp
             });
+
+            this.props.setLocationInfo(cachedData);
+
         }
 
     };
@@ -86,12 +94,15 @@ class IpSearchHandle extends Component {
     }
 
     axiosGETreq = async(IP) => {
+        console.log("HTTP request geolocate this ip: " + IP);
         let res = await axios.get(`https://getinfoip.com/api/?ip=${IP}`);
+        console.log("Status code HTTP Flask: " + res.status);
         const nan = "No data";
         const locationData = {
             longitude: res.data.match.location ? res.data.match.location.longitude : nan,
             latitude: res.data.match.location ? res.data.match.location.latitude : nan,
             ip: IP,
+            ownIp: this.state.ownip,
             cityName: res.data.match.city ? res.data.match.city .names.en : nan,
             continentName: res.data.match.continent ? res.data.match.continent.names.en : nan,
             countryName: res.data.match.country ? res.data.match.country.names.en : nan,
