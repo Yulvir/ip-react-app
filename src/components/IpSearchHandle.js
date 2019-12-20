@@ -4,8 +4,8 @@ import 'weather-icons/css/weather-icons.css';
 import {connect, Provider} from "react-redux";
 import {setLocationInfo} from "../js/actions/latitude-longitude-action";
 import store from "../js/store";
-import {setIpSearch} from "../js/actions/ip-action";
-import publicIP from "react-native-public-ip";
+const publicIp = require('public-ip');
+
 function mapDispatchToProps(dispatch) {
     return {
         setLocationInfo: output => dispatch(setLocationInfo(output))
@@ -34,13 +34,11 @@ class IpSearchHandle extends Component {
             ipItems: store.getState().ipInfo
       });
           this.state.ownIp = store.getState().ownIpInfo.ownIp;
+          this.state.ip = store.getState().ownIpInfo.ownIp;
+
+
+
     });
-
-        this.state.ip = this.state.ownIp;
-        if(this.state.ip){
-
-            this.requestIpInfo(this.state.ownIp)
-        }
 
         }
 
@@ -60,6 +58,17 @@ class IpSearchHandle extends Component {
 
 
     };
+
+        componentDidMount() {
+            console.log("executing component did mount");
+            this.getIp().then(r => this.requestIpInfo(r)).catch(function(error) {
+                console.log('There has been a problem fetching the ip: ' + error.message);
+                 // ADD THIS THROW error
+                  throw error;
+                });
+    }
+
+
     // 916 974 154
 
     requestIpInfo = (ip) => {
@@ -87,11 +96,14 @@ class IpSearchHandle extends Component {
         }
 
     };
-    componentDidMount() {
-        if(this.state.ownIp) {
-            this.requestIpInfo(this.state.ownIp)
-        }
-    }
+
+    getIp = async () => {
+
+            const ipv4 = await publicIp.v4() || "";
+            this.setState({ownIp: ipv4});
+            localStorage.setItem('data', JSON.stringify(this.state));
+            return ipv4
+      };
 
     axiosGETreq = async(IP) => {
         console.log("HTTP request geolocate this ip: " + IP);
