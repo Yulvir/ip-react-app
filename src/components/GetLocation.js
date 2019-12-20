@@ -50,17 +50,18 @@ class GetLocation extends Component {
 
     axiosGetLocationInfo = (location) => {
 
+        const nan = "No data";
 
         axios.post(`https://getinfoip.com/api/location_info`, { location })
             .then(res => {
                 const locationData = {
-                        cityName: res.data.location_info.city,
-                        continentName: res.data.location_info.continent,
-                        countryName: res.data.location_info.country,
-                        postalCode: res.data.location_info.postcode,
-                        timeZone: res.data.location_info.time_zone,
-                        latitude: this.state.latitude,
-                        longitude: this.state.longitude
+                        cityName: res.data.location_info.city ? res.data.location_info.city : nan,
+                        continentName: res.data.location_info.continent ? res.data.location_info.continent:nan,
+                        countryName: res.data.location_info.country ? res.data.location_info.country : nan,
+                        postalCode: res.data.location_info.postcode ? res.data.location_info.postcode : nan,
+                        timeZone: res.data.location_info.time_zone ? res.data.location_info.time_zone : nan,
+                        latitude: this.state.latitude ? this.state.latitude : nan,
+                        longitude: this.state.longitude ? this.state.longitude :nan
                 };
                 this.setState(locationData);
                 this.props.setLocationInfo(locationData);
