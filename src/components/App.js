@@ -9,12 +9,14 @@ import banner from './assets/img/81AyedcV+vL._SY550_.jpg'; // Tell Webpack this 
 import logo from './assets/img/logo.png';
 import store from "../js/store";
 import {connect, Provider} from "react-redux";
-import {setOwnIp} from "../js/actions/ip-action"; // Tell Webpack this JS file uses this image
+import {setOwnIp} from "../js/actions/ip-action";
+import {setLocationInfo} from "../js/actions/latitude-longitude-action"; // Tell Webpack this JS file uses this image
 const publicIp = require('public-ip');
 
 function mapDispatchToProps(dispatch) {
     return {
-        setOwnIp: output => dispatch(setOwnIp(output))
+        setOwnIp: output => dispatch(setOwnIp(output)),
+        setLocationInfo: output => dispatch(setLocationInfo(output))
     };
 }
 
@@ -27,10 +29,39 @@ class App extends Component {
 
       }
     componentDidMount() {
-                  this.getIp().then(r => this.props.setOwnIp({ownIp: r}))
+          this.getIp().then(r => this.setupData(r))
 
     }
+    setupData = (r) =>{
+          this.props.setOwnIp({ownIp: r});
+          this.axiosGETreq(r)
+    };
 
+    axiosGETreq = async(IP) => {
+        console.log("HTTP request geolocate this ip: " + IP);
+        let res = await axios.get(`https://getinfoip.com/api/?ip=${IP}`);
+        console.log("Status code HTTP Flask: " + res.status);
+        const nan = "No data";
+        const locationData = {
+            longitude: res.data.match.location ? res.data.match.location.longitude : nan,
+            latitude: res.data.match.location ? res.data.match.location.latitude : nan,
+            ip: IP,
+            ownIp: this.state.ownip,
+            cityName: res.data.match.city ? res.data.match.city .names.en : nan,
+            continentName: res.data.match.continent ? res.data.match.continent.names.en : nan,
+            countryName: res.data.match.country ? res.data.match.country.names.en : nan,
+            postalCode: res.data.match.postal ? res.data.match.postal.code : nan,
+            timeZone: res.data.match.location ? res.data.match.location.time_zone : nan
+
+        };
+
+        this.setState(locationData);
+
+        this.props.setLocationInfo(locationData);
+
+        localStorage.setItem('data', JSON.stringify(locationData));
+
+    };
     getIp = async () => {
 
             const ipv4 = await publicIp.v4() || "";

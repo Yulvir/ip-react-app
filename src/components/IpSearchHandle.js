@@ -5,6 +5,7 @@ import {connect, Provider} from "react-redux";
 import {setLocationInfo} from "../js/actions/latitude-longitude-action";
 import store from "../js/store";
 const publicIp = require('public-ip');
+const publicIP = require('public-ip');
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -61,11 +62,7 @@ class IpSearchHandle extends Component {
 
         componentDidMount() {
             console.log("executing component did mount");
-            this.getIp().then(r => this.requestIpInfo(r)).catch(function(error) {
-                console.log('There has been a problem fetching the ip: ' + error.message);
-                 // ADD THIS THROW error
-                  throw error;
-                });
+
     }
 
 
@@ -97,11 +94,12 @@ class IpSearchHandle extends Component {
 
     };
 
-    getIp = async () => {
 
-            const ipv4 = await publicIp.v4() || "";
+    getIp = async () => {
+            const ipv4 = await publicIp.v4();
             this.setState({ownIp: ipv4});
             localStorage.setItem('data', JSON.stringify(this.state));
+            console.log("Your IP is " + ipv4);
             return ipv4
       };
 
