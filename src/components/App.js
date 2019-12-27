@@ -6,7 +6,7 @@ import SearchBarForm from './SearchBar.js';
 
 import {ConnectedResultsContent} from './ResultsContent.js';
 import banner from './assets/img/81AyedcV+vL._SY550_.jpg'; // Tell Webpack this JS file uses this image
-import logo from './assets/img/logo.png';
+import logo from './assets/img/getinfoip.png';
 import store from "../js/store";
 import {connect, Provider} from "react-redux";
 import {setOwnIp} from "../js/actions/ip-action";
