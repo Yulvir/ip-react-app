@@ -79,4 +79,4 @@ export class ResultsContent extends Component {
   }
 }
 
-export const ConnectedResultsContent = connect(mapStateToProps)(ResultsContent)
+export const ConnectedResultsContent = connect(mapStateToProps)(ResultsContent);

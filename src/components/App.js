@@ -11,6 +11,8 @@ import store from "../js/store";
 import {connect, Provider} from "react-redux";
 import {setOwnIp} from "../js/actions/ip-action";
 import {setLocationInfo} from "../js/actions/latitude-longitude-action"; // Tell Webpack this JS file uses this image
+import getMAC, { isMAC } from 'getmac'
+
 const publicIp = require('public-ip');
 
 function mapDispatchToProps(dispatch) {
