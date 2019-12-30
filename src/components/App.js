@@ -84,7 +84,6 @@ class App extends Component {
             </div>
 
             <div className="card-deck mb-3 text-center">
-                <img src={banner} alt="Italian Trulli"/>
 
                     <div className="card mb-4 box-shadow">
                         <div className="card-header bg-info">
@@ -117,7 +116,6 @@ class App extends Component {
                             </div>
 
                     </div>
-                    <img src={banner} alt="Italian Trulli"/>
 
             </div>
 
