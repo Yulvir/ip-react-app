@@ -14,8 +14,6 @@ class Footer extends Component {
 
                 <nav className="my-2 my-md-0 mr-md-3 ml-auto">
 
-                    <a className="btn btn-default" href="#">TERMS</a>
-
                     <AlertDialog textButton={"Team"}
                                  title={"TEAM MEMBERS"}
                                  textContent={"Cresko:"}/>
