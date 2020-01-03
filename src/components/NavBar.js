@@ -17,8 +17,9 @@ class NavBar extends Component {
 
 
             <nav className="my-2 my-md-0 mr-md-3 ml-auto">
-                <a className="btn btn-info text-dark" href="#">   <Link to="/content" className="text-dark" >Documentation </Link> </a>
-                <a className="btn btn-info text-dark" href="#">   <Link to="/" className="text-dark">Home </Link> </a>
+                <a className="btn btn-info text-dark" >   <Link to="/developers" className="text-dark" >Developers </Link> </a>
+                <a className="btn btn-info text-dark" >   <Link to="/content" className="text-dark" >Documentation </Link> </a>
+                <a className="btn btn-info text-dark" >   <Link to="/" className="text-dark">Home </Link> </a>
             </nav>
         </div>
 

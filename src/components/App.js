@@ -43,7 +43,13 @@ class App extends Component {
               exact
               path="/content"
               render={() => <IpContent/>} />
+              <Route path='/developers' component={() => {
+                 window.location.href = 'https://getinfoip.com/api';
+                 return null;
+            }}/>
+
             <Route component={PageError} />
+
           </Switch>
         </div>
       </BrowserRouter>

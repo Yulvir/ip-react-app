@@ -41,7 +41,7 @@ class IpLocator extends Component {
 
     axiosGETreq = async(IP) => {
         console.log("HTTP request geolocate this ip: " + IP);
-        let res = await axios.get(`https://getinfoip.com/api/?ip=${IP}`);
+        let res = await axios.get(`https://getinfoip.com/api/ip_info?ip=${IP}`);
         console.log("Status code HTTP Flask: " + res.status);
         const nan = "No data";
         const locationData = {
