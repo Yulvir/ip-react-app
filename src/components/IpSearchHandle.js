@@ -4,8 +4,9 @@ import 'weather-icons/css/weather-icons.css';
 import {connect, Provider} from "react-redux";
 import {setLocationInfo} from "../js/actions/latitude-longitude-action";
 import store from "../js/store";
+import BASE_URL from './Config'
 const publicIp = require('public-ip');
-const publicIP = require('public-ip');
+
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -66,10 +67,9 @@ class IpSearchHandle extends Component {
     }
 
 
-    // 916 974 154
 
     requestIpInfo = (ip) => {
-        this.axiosGETreq(ip);
+        this.axiosGETreq(ip).then(r => console.log("Ip info fetched"));
     };
 
     //submit a GET request
@@ -105,7 +105,8 @@ class IpSearchHandle extends Component {
 
     axiosGETreq = async(IP) => {
         console.log("HTTP request geolocate this ip: " + IP);
-        let res = await axios.get(`https://getinfoip.com/api/ip_info?ip=${IP}`);
+
+        let res = await axios.get(`${BASE_URL}/ip_info?ip=${IP}`);
         console.log("Status code HTTP Flask: " + res.status);
         const nan = "No data";
         const locationData = {

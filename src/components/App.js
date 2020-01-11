@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import {setOwnIp} from "../js/actions/ip-action";
 import {setLocationInfo} from "../js/actions/latitude-longitude-action"; // Tell Webpack this JS file uses this image
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch} from 'react-router-dom';
 import IpLocator from "./IpLocator";
 import PageError from "./PageError";
 import IpContent from "./IpContent";
-import Header from "./Header";
 import NavBar from "./NavBar";
-
-const publicIp = require('public-ip');
 
 function mapDispatchToProps(dispatch) {
     return {

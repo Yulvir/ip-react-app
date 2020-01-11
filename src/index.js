@@ -9,7 +9,6 @@ import registerServiceWorker from './registerServiceWorker';
 import IpContent from "./components/IpContent";
 import App from "./components/App";
 
-
 ReactDOM.render(
     <Provider store={store}>
         <App/>

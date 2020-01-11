@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React  from 'react';
 import {connect} from "react-redux";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import store from "../js/store";

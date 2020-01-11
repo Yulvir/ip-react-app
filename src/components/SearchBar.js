@@ -1,18 +1,11 @@
 import React, {Component} from 'react';
-import axios from 'axios';
-import Toggle from 'react-toggle';
-import Search from 'react-icons/lib/md/search';
-import BackArrow from 'react-icons/lib/md/arrow-back';
 import 'weather-icons/css/weather-icons.css';
-import {connect, Provider} from "react-redux";
+import {connect} from "react-redux";
 import {setLocationInfo} from "../js/actions/latitude-longitude-action";
-import publicIP from 'react-native-public-ip';
 import {ConnectedClipboardIP} from './ClipboardIP'
 import store from "../js/store";
-import Header from "./Header";
 import GetLocationForm from "./GetLocation";
 import IpSearchHandleForm from "./IpSearchHandle";
-import GetMyIPForm from "./GetMyIp";
 
 function mapDispatchToProps(dispatch) {
     return {

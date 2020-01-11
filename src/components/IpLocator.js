@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import {ConnectedGoogleMapContainer} from './GoogleMap.js';
 import SearchBarForm from './SearchBar.js';
 
 import {ConnectedResultsContent} from './ResultsContent.js';
-import banner from './assets/img/81AyedcV+vL._SY550_.jpg'; // Tell Webpack this JS file uses this image
 import logo from './assets/img/getinfoip.png';
 import store from "../js/store";
 import {connect, Provider} from "react-redux";
 import {setOwnIp} from "../js/actions/ip-action";
 import {setLocationInfo} from "../js/actions/latitude-longitude-action"; // Tell Webpack this JS file uses this image
-import getMAC, { isMAC } from 'getmac'
-
+import BASE_URL from './Config'
 const publicIp = require('public-ip');
 
 function mapDispatchToProps(dispatch) {
@@ -36,12 +33,14 @@ class IpLocator extends Component {
     }
     setupData = (r) =>{
           this.props.setOwnIp({ownIp: r});
-          this.axiosGETreq(r)
+          this.axiosGETreq(r).then(value => console.log(value))
     };
 
     axiosGETreq = async(IP) => {
         console.log("HTTP request geolocate this ip: " + IP);
-        let res = await axios.get(`https://getinfoip.com/api/ip_info?ip=${IP}`);
+        console.log(`${BASE_URL}`);
+
+        let res = await axios.get(`${BASE_URL}/ip_info?ip=${IP}`);
         console.log("Status code HTTP Flask: " + res.status);
         const nan = "No data";
         const locationData = {

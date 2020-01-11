@@ -3,8 +3,7 @@ import axios from 'axios';
 import 'weather-icons/css/weather-icons.css';
 import {connect, Provider} from "react-redux";
 import {setLocationInfo} from "../js/actions/latitude-longitude-action";
-import store from "../js/store";
-
+import BASE_URL from './Config'
 function mapDispatchToProps(dispatch) {
     return {
         setLocationInfo: output => dispatch(setLocationInfo(output))
@@ -52,7 +51,7 @@ class GetLocation extends Component {
 
         const nan = "No data";
 
-        axios.post(`https://getinfoip.com/api/location_info`, { location })
+        axios.post(`${BASE_URL}/location_info`, { location })
             .then(res => {
                 const locationData = {
                         cityName: res.data.location_info.city ? res.data.location_info.city : nan,
