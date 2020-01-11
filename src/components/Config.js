@@ -1,7 +1,4 @@
-
-
-
-// Este codigo permite que se ejecute tanto de manera local como en produccion
+// Este codigo permite que podamos apuntar a flask local si desarrollamos en local o a flask desplegado si estamos en producción
 
 // para npm start ----> process.env.NODE_ENV = development
 // para npm run build ----> process.env.NODE_ENV = production
