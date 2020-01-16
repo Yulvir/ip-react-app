@@ -20,12 +20,18 @@ export class GoogleMapContainer extends Component  {
   constructor(props) {
     super(props);
 
-    this.state = {
-       items: [],
-       initialLocation: {lat: -3, lng: 40}
-     };
 
-    const mapHeight = window.innerHeight;
+    if (this.props.locationData){
+        this.state = {
+       items: [],
+       initialLocation: {lat: this.props.locationData.latitude, lng: this.props.locationData.longitude}
+     };
+    } else {
+        this.state = {
+       items: [],
+       initialLocation: {lat: 40, lng: -3}
+     };
+    }
 
 
      store.subscribe(() => {
@@ -44,29 +50,46 @@ export class GoogleMapContainer extends Component  {
   }
 
     componentDidMount() {
-        this.updateDimensions();
-        window.addEventListener("resize", this.updateDimensions);
     }
 
     componentWillUnmount() {
-        window.removeEventListener("resize", this.updateDimensions);
     }
 
-    updateDimensions = () => {
-        let windowWidth = typeof window !== "undefined" ? window.innerWidth : 0;
-        let windowHeight = typeof window !== "undefined" ? window.innerHeight : 0;
-        this.setState({windowWidth: windowWidth, windowHeight: windowHeight});
-    }
+
   displayMarkers = () => {
-    const locationObject = this.props.locationInfo;
-    return [this.state.items].map((store, index) => {
-      return <Marker key={index} id={index} position={{
-       lat: store.latitude,
-       lng: store.longitude
-     }}
-     onClick={() => console.log("You clicked me!")} />
-    })
-  }
+
+
+      // TODO: Quitar este Workaround feo!!!
+
+      if (this.state.items.length !== 0){
+
+          // Cuando el store no esta vacios coge la latitud y la longitud
+          return [this.state.items].map((d, index) => {
+              return <Marker key={index} id={index} position={{
+               lat: d.latitude,
+               lng: d.longitude
+             }}
+             onClick={() => console.log("You clicked me!")} />
+            })
+      } else {
+
+          // Cuando el store esta vacios pillalo de locationData
+
+          return [this.props.locationData].map((d, index) => {
+              return <Marker key={index} id={index} position={{
+               lat: d.latitude,
+               lng: d.longitude
+             }}
+             onClick={() => console.log("You clicked me!")} />
+            })
+
+
+      }
+  };
+
+
+
+
   render() {
     return (
 
@@ -92,4 +115,4 @@ export const ConnectedGoogleMapContainer = connect(mapStateToProps) (GoogleApiWr
   (props) => ({
     apiKey: 'AIzaSyBwEjD8EAegAdB081xT4WZlsSi8bedy5JY'
   })
-)(GoogleMapContainer))
+)(GoogleMapContainer));

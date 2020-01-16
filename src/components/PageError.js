@@ -1,12 +1,4 @@
 import React, {Component} from 'react';
-import AlertDialog from './Dialog';
-import logo from "./assets/img/getinfoip.png";
-import banner from "./assets/img/81AyedcV+vL._SY550_.jpg";
-import {Provider} from "react-redux";
-import store from "../js/store";
-import SearchBarForm from "./SearchBar";
-import {ConnectedResultsContent} from "./ResultsContent";
-import {ConnectedGoogleMapContainer} from "./GoogleMap";
 
 class PageError extends Component {
 

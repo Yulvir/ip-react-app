@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React  from 'react';
 import {connect} from "react-redux";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import store from "../js/store";
@@ -31,7 +31,7 @@ class ClipboardIP extends React.Component {
       return  ([
 
 
-           <div className="alert alert-light" role="alert">
+           <div key={index} className="alert alert-light" role="alert">
                       <CopyToClipboard text={store.ownIp}
                                        onCopy={() => this.setState({copied: true})}>
                           <h3>Your ip is {store.ownIp}</h3>
@@ -50,7 +50,7 @@ class ClipboardIP extends React.Component {
 
           {this.state.copied ? <span style={{color: 'red'}}>Copied</span> : null}
 
-          </div>
+      </div>
 
     );
   }

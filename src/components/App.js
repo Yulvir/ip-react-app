@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import {setOwnIp} from "../js/actions/ip-action";
 import {setLocationInfo} from "../js/actions/latitude-longitude-action"; // Tell Webpack this JS file uses this image
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import IpLocator from "./IpLocator";
 import PageError from "./PageError";
 import IpContent from "./IpContent";
-import Header from "./Header";
 import NavBar from "./NavBar";
-
-const publicIp = require('public-ip');
+import BASE_URL from "./Config";
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -44,7 +42,7 @@ class App extends Component {
               path="/content"
               render={() => <IpContent/>} />
               <Route path='/developers' component={() => {
-                 window.location.href = 'https://getinfoip.com/api';
+                 window.location.href = `${BASE_URL}`;
                  return null;
             }}/>
 

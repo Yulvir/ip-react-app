@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import axios from 'axios';
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import {ConnectedGoogleMapContainer} from './GoogleMap.js';
 import SearchBarForm from './SearchBar.js';
 
 import {ConnectedResultsContent} from './ResultsContent.js';
-import banner from './assets/img/81AyedcV+vL._SY550_.jpg'; // Tell Webpack this JS file uses this image
 import logo from './assets/img/getinfoip.png';
 import store from "../js/store";
 import {connect, Provider} from "react-redux";
 import {setOwnIp} from "../js/actions/ip-action";
 import {setLocationInfo} from "../js/actions/latitude-longitude-action"; // Tell Webpack this JS file uses this image
-import getMAC, { isMAC } from 'getmac'
+import BASE_URL from "./Config";
 
 const publicIp = require('public-ip');
 
@@ -24,32 +22,35 @@ function mapDispatchToProps(dispatch) {
 
 
 class IpLocator extends Component {
-      constructor(props) {
+    constructor(props) {
         super(props);
-        this.setState({ownIP : ""})
+    }
 
-
-      }
     componentDidMount() {
-          this.getIp().then(r => this.setupData(r))
+        this.getIp().then(r => this.setupData(r))
 
     }
-    setupData = (r) =>{
-          this.props.setOwnIp({ownIp: r});
-          this.axiosGETreq(r)
+
+    setupData = (r) => {
+        this.props.setOwnIp({ownIp: r});
+        this.getInfoIp(r)
     };
 
-    axiosGETreq = async(IP) => {
+
+    getInfoIp = async (IP) => {
         console.log("HTTP request geolocate this ip: " + IP);
-        let res = await axios.get(`https://getinfoip.com/api/ip_info?ip=${IP}`);
+
+        const url = `${BASE_URL}/ip_info?ip=${IP}`;
+
+        let res = await axios.get(url);
         console.log("Status code HTTP Flask: " + res.status);
         const nan = "No data";
         const locationData = {
             longitude: res.data.match.location ? res.data.match.location.longitude : nan,
             latitude: res.data.match.location ? res.data.match.location.latitude : nan,
             ip: IP,
-            ownIp: this.state.ownip,
-            cityName: res.data.match.city ? res.data.match.city .names.en : nan,
+            ownIp: this.state.ownIp,
+            cityName: res.data.match.city ? res.data.match.city.names.en : nan,
             continentName: res.data.match.continent ? res.data.match.continent.names.en : nan,
             countryName: res.data.match.country ? res.data.match.country.names.en : nan,
             postalCode: res.data.match.postal ? res.data.match.postal.code : nan,
@@ -66,24 +67,28 @@ class IpLocator extends Component {
     };
     getIp = async () => {
 
-            const ipv4 = await publicIp.v4() || "";
-            this.setState({ownIp: ipv4});
-            localStorage.setItem('data', JSON.stringify(this.state));
-            return ipv4
-      };
+        const ipv4 = await publicIp.v4() || "";
+        this.setState({ownIp: ipv4});
+        localStorage.setItem('data', JSON.stringify(this.state));
+        return ipv4
+    };
 
 
-  render() {
-    return (
 
-        <div className="container-fluid">
-            <div className="mx-auto" style={{width:"400px"}}>
 
-                <img src={logo} style={{width:"400px", margin: '0 auto'}} className="img-fluid" alt="Italian Trulli"/>
 
-            </div>
+    render() {
+        return (
 
-            <div className="card-deck mb-3 text-center">
+            <div className="container-fluid">
+                <div className="mx-auto" style={{width: "400px"}}>
+
+                    <img src={logo} style={{width: "400px", margin: '0 auto'}} className="img-fluid"
+                         alt="Italian Trulli"/>
+
+                </div>
+
+                <div className="card-deck mb-3 text-center">
 
                     <div className="card mb-4 box-shadow">
                         <div className="card-header bg-info">
@@ -91,14 +96,14 @@ class IpLocator extends Component {
                         </div>
                         <div className="card-body">
                             <Provider store={store}>
-                              <SearchBarForm/>
-                              </Provider>
+                                <SearchBarForm/>
+                            </Provider>
                         </div>
                         <div className="card-body">
 
-                             <Provider store={store}>
-                              <ConnectedResultsContent/>
-                              </Provider>
+                            <Provider store={store}>
+                                <ConnectedResultsContent/>
+                            </Provider>
                         </div>
                     </div>
                     <div className="card mb-4 box-shadow">
@@ -107,22 +112,21 @@ class IpLocator extends Component {
                         </div>
 
 
-                            <div className="embed-responsive embed-responsive-1by1">
-                                <div className="embed-responsive-item">
-                            <Provider store={store}>
-                              <ConnectedGoogleMapContainer/>
-                              </Provider>
+                        <div className="embed-responsive embed-responsive-1by1">
+                            <div className="embed-responsive-item">
+                                <Provider store={store}>
+                                    <ConnectedGoogleMapContainer locationData={this.state}/>
+                                </Provider>
                             </div>
-                            </div>
-
+                        </div>
                     </div>
+
+                </div>
 
             </div>
 
-        </div>
-
-    );
-  }
+        );
+    }
 }
 
 export default connect(

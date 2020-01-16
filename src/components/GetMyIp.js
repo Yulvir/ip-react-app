@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import 'weather-icons/css/weather-icons.css';
-import {connect, Provider} from "react-redux";
-import {setIpSearch, setOwnIp} from "../js/actions/ip-action";
-import store from "../js/store";
+import {connect} from "react-redux";
+import {setOwnIp} from "../js/actions/ip-action";
 const publicIp = require('public-ip');
 
 function mapDispatchToProps(dispatch) {

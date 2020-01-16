@@ -4,8 +4,8 @@ import 'weather-icons/css/weather-icons.css';
 import {connect, Provider} from "react-redux";
 import {setLocationInfo} from "../js/actions/latitude-longitude-action";
 import store from "../js/store";
+import BASE_URL from "./Config";
 const publicIp = require('public-ip');
-const publicIP = require('public-ip');
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -65,11 +65,8 @@ class IpSearchHandle extends Component {
 
     }
 
-
-    // 916 974 154
-
     requestIpInfo = (ip) => {
-        this.axiosGETreq(ip);
+        this.getInfoIp(ip);
     };
 
     //submit a GET request
@@ -103,16 +100,19 @@ class IpSearchHandle extends Component {
             return ipv4
       };
 
-    axiosGETreq = async(IP) => {
+    getInfoIp = async(IP) => {
         console.log("HTTP request geolocate this ip: " + IP);
-        let res = await axios.get(`https://getinfoip.com/api/ip_info?ip=${IP}`);
+
+        const url = `${BASE_URL}/ip_info?ip=${IP}`;
+
+        let res = await axios.get(url);
         console.log("Status code HTTP Flask: " + res.status);
         const nan = "No data";
         const locationData = {
             longitude: res.data.match.location ? res.data.match.location.longitude : nan,
             latitude: res.data.match.location ? res.data.match.location.latitude : nan,
             ip: IP,
-            ownIp: this.state.ownip,
+            ownIp: this.state.ownIp,
             cityName: res.data.match.city ? res.data.match.city .names.en : nan,
             continentName: res.data.match.continent ? res.data.match.continent.names.en : nan,
             countryName: res.data.match.country ? res.data.match.country.names.en : nan,
@@ -135,7 +135,7 @@ class IpSearchHandle extends Component {
     return [this.state.ownIpItems].map((store, index) => {
       return  (
 
-          <input className="form-control" type="text" aria-label="Search"
+          <input key={index} className="form-control" type="text" aria-label="Search"
                                        placeholder={"Your current IP \t ==> \t" + store.ownIp}
                                        onChange={this.handleSearch}/>
 
