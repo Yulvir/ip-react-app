@@ -24,6 +24,9 @@ function mapDispatchToProps(dispatch) {
 class IpLocator extends Component {
     constructor(props) {
         super(props);
+
+        this.state = localStorage.getItem("data") ? JSON.parse(localStorage.getItem("data")) : {};
+
     }
 
     componentDidMount() {
@@ -36,6 +39,10 @@ class IpLocator extends Component {
         this.getInfoIp(r)
     };
 
+    componentWillUnmount() {
+      // Remember state for the next mount
+      localStorage.setItem('data', JSON.stringify(this.state));
+    }
 
     getInfoIp = async (IP) => {
         console.log("HTTP request geolocate this ip: " + IP);
@@ -72,10 +79,6 @@ class IpLocator extends Component {
         localStorage.setItem('data', JSON.stringify(this.state));
         return ipv4
     };
-
-
-
-
 
     render() {
         return (

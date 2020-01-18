@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import 'weather-icons/css/weather-icons.css';
-import {connect, Provider} from "react-redux";
+import {connect} from "react-redux";
 import {setLocationInfo} from "../js/actions/latitude-longitude-action";
 import store from "../js/store";
 import BASE_URL from "./Config";

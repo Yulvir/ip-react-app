@@ -1,20 +1,11 @@
 import React, { Component } from 'react';
-import {setOwnIp} from "../js/actions/ip-action";
-import {setLocationInfo} from "../js/actions/latitude-longitude-action"; // Tell Webpack this JS file uses this image
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import IpLocator from "./IpLocator";
 import PageError from "./PageError";
 import IpContent from "./IpContent";
 import NavBar from "./NavBar";
 import BASE_URL from "./Config";
-
-function mapDispatchToProps(dispatch) {
-    return {
-        setOwnIp: output => dispatch(setOwnIp(output)),
-        setLocationInfo: output => dispatch(setLocationInfo(output))
-    };
-}
-
+import Cidr from "./Cidr";
 
 class App extends Component {
       constructor(props) {
@@ -37,6 +28,11 @@ class App extends Component {
                 exact
               path="/"
               component={IpLocator} />
+              <Route
+                exact
+              path="/cidr"
+              component={Cidr} />
+
             <Route
               exact
               path="/content"
