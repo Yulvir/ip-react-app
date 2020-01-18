@@ -129,8 +129,17 @@ CIDR encompasses several concepts. It is based on the variable-length subnet mas
 
                         <div className="card-body">
 
-                            <h1>{this.state.ipStart}</h1>
-                            <h1>{this.state.ipEnd}</h1>
+                            {
+                                    this.state.ipStart &&  !this.state.cidrNotValid &&(
+                                        <div >
+
+                                            <h1>First Ip: {this.state.ipStart}</h1>
+                                            <h1>Last Ip: {this.state.ipEnd}</h1>
+                                        </div>
+                                    )
+
+                            }
+
                         </div>
 
 
