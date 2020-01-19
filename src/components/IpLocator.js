@@ -95,7 +95,7 @@ class IpLocator extends Component {
 
                     <div className="card mb-4 box-shadow">
                         <div className="card-header bg-info">
-                            <h4 className="my-0 font-weight-lighter ">Search with your current IP</h4>
+                            <h1 className="my-0 font-weight-lighter ">Search with your current IP</h1>
                         </div>
                         <div className="card-body">
                             <Provider store={store}>
@@ -111,7 +111,7 @@ class IpLocator extends Component {
                     </div>
                     <div className="card mb-4 box-shadow">
                         <div className="card-header bg-info">
-                            <h4 className="my-0 font-weight-lighter">Google Map</h4>
+                            <h1 className="my-0 font-weight-lighter">Google Map</h1>
                         </div>
 
 

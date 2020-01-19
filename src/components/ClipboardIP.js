@@ -34,7 +34,7 @@ class ClipboardIP extends React.Component {
            <div key={index} className="alert alert-light" role="alert">
                       <CopyToClipboard text={store.ownIp}
                                        onCopy={() => this.setState({copied: true})}>
-                          <h3>Your ip is {store.ownIp}</h3>
+                          <h2>Your ip is {store.ownIp}</h2>
                       </CopyToClipboard>
                   </div>
 
