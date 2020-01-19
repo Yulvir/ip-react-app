@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {setOwnIp} from "../js/actions/ip-action";
 import {setLocationInfo} from "../js/actions/latitude-longitude-action"; // Tell Webpack this JS file uses this image
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import IpLocator from "./IpLocator";
 import PageError from "./PageError";
 import IpContent from "./IpContent";
@@ -19,43 +19,44 @@ function mapDispatchToProps(dispatch) {
 
 
 class App extends Component {
-      constructor(props) {
+    constructor(props) {
         super(props);
 
 
-      }
+    }
+
     componentDidMount() {
 
     }
 
 
-  render() {
-    return (
-    <BrowserRouter>
-        <div>
-          <NavBar />
-          <Switch>
-            <Route
-                exact
-              path="/"
-              component={IpLocator} />
-            <Route
-              exact
-              path="/content"
-              render={() => <IpContent/>} />
-              <Route path='/developers' component={() => {
-                 window.location.href = 'https://getinfoip.com/api';
-                 return null;
-            }}/>
+    render() {
+        return (
+            <BrowserRouter>
+                <div>
+                    <NavBar/>
+                    <Switch>
+                        <Route
+                            exact
+                            path="/"
+                            component={IpLocator}/>
+                        <Route
+                            exact
+                            path="/content"
+                            render={() => <IpContent/>}/>
+                        <Route path='/developers' component={() => {
+                            window.location.href = 'https://getinfoip.com/api';
+                            return null;
+                        }}/>
 
-            <Route component={PageError} />
+                        <Route component={PageError}/>
 
-          </Switch>
-        </div>
-      </BrowserRouter>
+                    </Switch>
+                </div>
+            </BrowserRouter>
 
-    );
-  }
+        );
+    }
 }
 
 export default App;

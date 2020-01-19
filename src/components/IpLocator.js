@@ -7,11 +7,11 @@ import SearchBarForm from './SearchBar.js';
 import {ConnectedResultsContent} from './ResultsContent.js';
 import banner from './assets/img/81AyedcV+vL._SY550_.jpg'; // Tell Webpack this JS file uses this image
 import logo from './assets/img/getinfoip.png';
+import personalLogo from './assets/img/mundo-con-gafas/mundo-con-gafas.png'
 import store from "../js/store";
 import {connect, Provider} from "react-redux";
 import {setOwnIp} from "../js/actions/ip-action";
 import {setLocationInfo} from "../js/actions/latitude-longitude-action"; // Tell Webpack this JS file uses this image
-import getMAC, { isMAC } from 'getmac'
 
 const publicIp = require('public-ip');
 
@@ -79,6 +79,7 @@ class IpLocator extends Component {
         <div className="container-fluid">
             <div className="mx-auto" style={{width:"400px"}}>
 
+                <img src={personalLogo} style={{width:"400px", margin: '0 auto'}} className="img-fluid" alt="Italian Trulli"/>
                 <img src={logo} style={{width:"400px", margin: '0 auto'}} className="img-fluid" alt="Italian Trulli"/>
 
             </div>
