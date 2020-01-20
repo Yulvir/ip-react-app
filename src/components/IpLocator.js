@@ -91,7 +91,7 @@ class IpLocator extends Component {
                          alt="getinfoip logo"/>
 
                 </div>
-                <IntroductionText/>
+
 
                 <div className="card-deck mb-3 text-center">
 
