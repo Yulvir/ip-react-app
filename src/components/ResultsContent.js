@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import 'weather-icons/css/weather-icons.css';
 import store from '../js/store/index'
 import {connect} from "react-redux";
 

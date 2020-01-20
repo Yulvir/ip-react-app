@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Get info ip",
+  "name": "Get info ip. Locating Ip's in maps",
   "icons": [
     {
       "src": "favicon.ico",
