@@ -95,7 +95,7 @@ class Cidr extends Component {
                             <form onSubmit={this.handleSubmit}>
                                 <div style={{marginTop: "5%"}}>
                                     <h3>Calculate first and last IP of CIDR block</h3>
-                                        <p3>example: 10.12.12.12/27</p3>
+                                        <p>example: 10.12.12.12/27</p>
                                     <div className="input-group mb-3">
 
 
