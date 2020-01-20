@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import registerServiceWorker from './registerServiceWorker';
 import IpContent from "./components/IpContent";
 import App from "./components/App";
+import IntroductionText from "./components/IntroductionText";
 
 
 ReactDOM.render(

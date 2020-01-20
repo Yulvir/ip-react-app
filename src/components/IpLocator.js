@@ -87,7 +87,7 @@ class IpLocator extends Component {
                 <div className="mx-auto" style={{width: "400px"}}>
 
                     <img src={logo} style={{width: "400px", margin: '0 auto'}} className="img-fluid"
-                         alt="Italian Trulli"/>
+                         alt="getinfoip logo"/>
 
                 </div>
 
