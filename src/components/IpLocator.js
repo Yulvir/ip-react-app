@@ -10,6 +10,7 @@ import {connect, Provider} from "react-redux";
 import {setOwnIp} from "../js/actions/ip-action";
 import {setLocationInfo} from "../js/actions/latitude-longitude-action"; // Tell Webpack this JS file uses this image
 import BASE_URL from "./Config";
+import IntroductionText from "./IntroductionText";
 
 const publicIp = require('public-ip');
 
@@ -90,6 +91,7 @@ class IpLocator extends Component {
                          alt="getinfoip logo"/>
 
                 </div>
+                <IntroductionText/>
 
                 <div className="card-deck mb-3 text-center">
 
