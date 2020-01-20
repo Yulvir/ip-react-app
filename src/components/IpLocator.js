@@ -92,7 +92,6 @@ class IpLocator extends Component {
 
                 </div>
 
-
                 <div className="card-deck mb-3 text-center">
 
                     <div className="card mb-4 box-shadow">
@@ -127,6 +126,8 @@ class IpLocator extends Component {
                     </div>
 
                 </div>
+                <IntroductionText/>
+
 
             </div>
 
