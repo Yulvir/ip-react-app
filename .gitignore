@@ -4,3 +4,5 @@ npm-debug*
 node_modules/
 *.zip
 package-lock.json
+.next/
+package-lock.json
