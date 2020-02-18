@@ -135,6 +135,18 @@ export const reducer = (state = exampleInitialState, action) => {
                 ...state,
                 location: action.payload,
             });
+
+        case actionTypes.SET_DOWNLOAD_SPEED:
+            return Object.assign({}, state, {
+                ...state,
+                downloadSpeed: action.payload,
+            });
+
+        case actionTypes.SET_UPLOAD_SPEED:
+            return Object.assign({}, state, {
+                ...state,
+                uploadSpeed: action.payload,
+            });
         default:
             return state
     }

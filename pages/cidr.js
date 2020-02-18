@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 let SubnetCIDRAdviser = require('subnet-cidr-calculator');
 const IpCidr = require("ip-cidr");
 const cidrRegex = require('cidr-regex');
-import Router from 'next/router';
 
 class Cidr extends React.Component {
     static getInitialProps({store}) {
@@ -22,7 +21,6 @@ class Cidr extends React.Component {
 
 
         this.handleSearchPhraseChange = this.handleSearchPhraseChange.bind(this);
-        this.redirectToSearchPage = this.redirectToSearchPage.bind(this);
     }
 
     handleSearchPhraseChange(event) {
@@ -41,6 +39,7 @@ class Cidr extends React.Component {
                 console.log("Invalid CIDR")
             } else {
                 let ip_range = SubnetCIDRAdviser.getIpRangeForSubnet(value);
+                console.log(SubnetCIDRAdviser.getIpRangeForSubnet(value));
                 console.log('IP range for 10.0.32.0/20 is', ip_range);
 
                 this.setState({
@@ -56,14 +55,6 @@ class Cidr extends React.Component {
             });
             console.log("Invalid regex for CIDR")
         }
-    }
-
-
-    redirectToSearchPage() {
-        Router.push({
-            pathname: '/search',
-            query: {q: this.state.searchPhrase, f: this.state.selectedFormat},
-        });
     }
 
     inputDisplayPlaceHolder = () => {

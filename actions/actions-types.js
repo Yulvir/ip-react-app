@@ -27,4 +27,7 @@ export const actionTypes = {
     GET_MY_IP_REQUEST: `${prefix} Get My Ip Request`,
     GET_MY_IP_SUCCESS: `${prefix} Get My Ip Success`,
     GET_MY_IP_ERROR: `${prefix} Get My Ip Error`,
+
+    SET_DOWNLOAD_SPEED: `${prefix} Set Download Speed`,
+    SET_UPLOAD_SPEED: `${prefix} Set Upload Speed`,
 };
