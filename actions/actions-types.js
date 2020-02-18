@@ -10,6 +10,7 @@ export const actionTypes = {
     SET_IP_COPIED: `${prefix} SET IP COPIED`,
     SET_LOCATION: `${prefix} SET LOCATION`,
     SET_IP: `${prefix} SET IP`,
+    SET_MY_IP: `${prefix} SET MY IP`,
 
     IP_IS_VALID: `${prefix} Valid ip`,
     SET_START_IP_VALIDATION: `${prefix} Set Start Ip Validation`,

@@ -9,6 +9,7 @@ export const setCopied = (copied) => ({type: actionTypes.SET_IP_COPIED, payload:
 
 export const getMyIpRequest = () => ({type: actionTypes.GET_MY_IP_REQUEST});
 export const getMyIpSuccess = myIp => ({type: actionTypes.GET_MY_IP_SUCCESS, payload: myIp});
+export const setMyIp = myIp => ({type: actionTypes.SET_MY_IP, payload: myIp});
 export const getMyIpError = errors => ({type: actionTypes.GET_MY_IP_ERROR, errors});
 
 

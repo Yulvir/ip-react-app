@@ -14,7 +14,7 @@ export default () => {
         return (
             <div className="alert alert-light" role="alert">
                 <CopyToClipboard text={myIp}
-                                 onCopy={() => dispatch(setCopied())}>
+                                 onCopy={() => dispatch(setCopied(true))}>
                     <h2>Your ip is {myIp}</h2>
                 </CopyToClipboard>
             </div>

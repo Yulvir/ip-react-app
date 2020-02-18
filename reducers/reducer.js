@@ -53,6 +53,11 @@ export const reducer = (state = exampleInitialState, action) => {
                 ...state,
                 startedValidating: action.payload,
             });
+        case actionTypes.SET_MY_IP:
+            return Object.assign({}, state, {
+                ...state,
+                myIp: action.payload,
+            });
 
         // SET MY LOCATION FROM BROWSER
         case actionTypes.GET_LOCATION_INFO_REQUEST:

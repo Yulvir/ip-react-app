@@ -7,7 +7,7 @@ import {
     getInfoIpSuccess, getLocationInfoError, getLocationInfoRequest, getLocationInfoSuccess,
     getMyIpError,
     getMyIpRequest,
-    getMyIpSuccess,
+    getMyIpSuccess, setMyIp,
 } from "./actions";
 
 export const fetchMyIp = () => {
@@ -22,6 +22,9 @@ export const fetchMyIp = () => {
         }
     };
 };
+
+
+
 
 
 export const getInfoIp = (ip) => {
@@ -91,6 +94,29 @@ export function fetchMyIpAndGetInfoIp() {
     return function (dispatch, getState) {
         // Remember I told you dispatch() can now handle thunks?
         return dispatch(fetchMyIp()).then(() => {
+            // Assuming this is where the fetched user got stored
+            const myIp = getState().myIp;
+            const ip = getState().ip;
+            let targetIp = myIp;
+            if (ip !== "") {
+                targetIp = ip
+            }
+            console.log("TARGET IP IS " + targetIp);
+            console.log(targetIp);
+            // Assuming it has a "postIDs" field:
+            // And we can dispatch() another thunk now!
+            return dispatch(getInfoIp(targetIp))
+        }).catch(reason => console.log(reason))
+    }
+}
+
+// Now we can combine them
+export function setMyIpAndGetInfoIp() {
+    // Again, Redux Thunk will inject dispatch here.
+    // It also injects a second argument called getState() that lets us read the current state.
+    return function (dispatch, getState) {
+        // Remember I told you dispatch() can now handle thunks?
+        return dispatch(setMyIp()).then(() => {
             // Assuming this is where the fetched user got stored
             const myIp = getState().myIp;
             const ip = getState().ip;

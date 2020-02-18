@@ -2,4 +2,4 @@ User-Agent: *
 Allow: /
 Allow: /cidr
 Allow: /documentation
-Sitemap: https://getinfoip.com/sitemap.xml
+Sitemap: https://getinfoip.com/static/sitemap.xml
