@@ -27,3 +27,9 @@ export const getInfoIpError = errors => ({type: actionTypes.GET_INFO_IP_ERROR, e
 export const setDownloadSpeed = downloadSpeed => ({type:actionTypes.SET_DOWNLOAD_SPEED, payload: downloadSpeed});
 export const setUploadSpeed = uploadSpeed => ({type:actionTypes.SET_UPLOAD_SPEED, payload: uploadSpeed});
 
+export const startDownloadTest = () => ({type:actionTypes.START_DOWNLOAD_TEST});
+export const startUploadTest = () => ({type:actionTypes.START_UPLOAD_TEST});
+
+export const setProgressDownloadSpeed = downloadSpeed => ({type:actionTypes.SET_PROGRESS_DOWNLOAD_SPEED, payload: downloadSpeed});
+export const setProgressUploadSpeed = uploadSpeed => ({type:actionTypes.SET_PROGRESS_UPLOAD_SPEED, payload: uploadSpeed});
+

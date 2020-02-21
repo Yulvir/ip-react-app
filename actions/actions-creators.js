@@ -7,7 +7,7 @@ import {
     getInfoIpSuccess, getLocationInfoError, getLocationInfoRequest, getLocationInfoSuccess,
     getMyIpError,
     getMyIpRequest,
-    getMyIpSuccess, setMyIp,
+    getMyIpSuccess, setDownloadSpeed, setMyIp, setUploadSpeed, startDownloadTest, startUploadTest,
 } from "./actions";
 
 export const fetchMyIp = () => {
@@ -23,8 +23,28 @@ export const fetchMyIp = () => {
 };
 
 
+export const startDownTest = () => {
+    return async (dispatch) => {
+        dispatch(startDownloadTest());
+        require('speedtest-net')().on('downloadspeedprogress', speed => {
+            console.log('Download speed (in progress):', (speed * 125).toFixed(2), 'KB/s');
+            dispatch(setDownloadSpeed((speed * 125).toFixed(2)))
 
+        });
 
+    };
+};
+export const startUpTest = () => {
+    return async (dispatch) => {
+        dispatch(startUploadTest());
+        require('speedtest-net')().on('uploadspeedprogress', speed => {
+            console.log('Upload speed (in progress):', (speed * 125).toFixed(2), 'KB/s');
+            dispatch(setUploadSpeed((speed * 125).toFixed(2)))
+
+        });
+
+    };
+};
 
 export const getInfoIp = (ip) => {
     return async (dispatch) => {
@@ -45,7 +65,11 @@ export const getLocationResults = (location) => {
     return async (dispatch) => {
         dispatch(getLocationInfoRequest());
         const url = `${BASE_URL}/location_info`;
-        const response = await fetch(url, {method: "POST", body: JSON.stringify(location), headers: {"Content-Type": "application/json"}});
+        const response = await fetch(url, {
+            method: "POST",
+            body: JSON.stringify(location),
+            headers: {"Content-Type": "application/json"}
+        });
         const json = await response.json();
         if (response.status === 200) {
             return dispatch(getLocationInfoSuccess(json));
@@ -120,14 +144,3 @@ export function setMyIpAndGetInfoIp() {
     }
 }
 
-
-//REDUX-THUNK actions
-
-
-//
-// export function getInfoIp(ip) {
-//   return function(dispatch) {
-//     dispatch(setInfoIp(ip));
-//
-//   }
-// }

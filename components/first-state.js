@@ -38,6 +38,8 @@ const exampleInitialState = {
     ipNotValid: false,
     startedValidating: false,
     copied: false,
-    ip: ""
+    ip: "",
+    downloadSpeed: "",
+    uploadSpeed: ""
 };
 export default exampleInitialState;

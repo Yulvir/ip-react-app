@@ -28,6 +28,12 @@ export const actionTypes = {
     GET_MY_IP_SUCCESS: `${prefix} Get My Ip Success`,
     GET_MY_IP_ERROR: `${prefix} Get My Ip Error`,
 
+    START_DOWNLOAD_TEST: `${prefix} Start Download Test`,
+    START_UPLOAD_TEST: `${prefix} Start Upload Test`,
+
     SET_DOWNLOAD_SPEED: `${prefix} Set Download Speed`,
     SET_UPLOAD_SPEED: `${prefix} Set Upload Speed`,
+
+    SET_PROGRESS_DOWNLOAD_SPEED : `${prefix} Set Progress Download Speed`,
+    SET_PROGRESS_UPLOAD_SPEED : `${prefix} Set Progress Upload Speed`
 };

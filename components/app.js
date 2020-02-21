@@ -1,12 +1,8 @@
 import {useDispatch, useSelector} from 'react-redux'
-import DisplayCounter from './display-counter'
 import ResultsContent from './results-content'
 import GoogleMap from './google-map'
-import IpSearchHandle from './search-ip'
-import GetLocationFromBrowser from './get-location-from-browser'
 import IntroductionText from './introduction-text'
 import React from "react";
-import ClipBoardIp from './clipboard-ip'
 import SearchBar from './search-bar'
 export default () => {
     const isLoadingGetInfoIp = useSelector(state => state.isLoadingGetInfoIp);

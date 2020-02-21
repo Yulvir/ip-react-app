@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from "react";
-
+import InternetTest from '../components/internet-test'
 var speedTest = require('speedtest-net');
 var test = speedTest();
 
@@ -20,17 +20,15 @@ class InternetSpeed extends React.Component {
                 console.log('Upload speed:', (speed * 125).toFixed(2), 'KB/s');
             });
 
-            require('speedtest-net')().on('downloadspeedprogress', speed => {
-                console.log('Download speed (in progress):', (speed * 125).toFixed(2), 'KB/s');
-            });
-            require('speedtest-net')().on('uploadspeedprogress', speed => {
-                console.log('Upload speed (in progress):', (speed * 125).toFixed(2), 'KB/s');
-            });
         }
 
         return {}
     }
 
+
+    startInternetSpeedTest = () => {
+
+    };
 
     render() {
 
@@ -43,17 +41,7 @@ class InternetSpeed extends React.Component {
                         <div className="card-header bg-info">
                             <h4 className="my-0 font-weight-lighter ">Internet Speed Test</h4>
                         </div>
-                        <div className="card-body">
-
-                            <div className="input-group mb-3">
-                                <div className="input-group-append">
-                                    <button
-                                        className="btn btn-outline-success btn-rounded btn-sm"
-                                        type="submit">Start Speed Test
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        <InternetTest/>
 
                     </div>
 
