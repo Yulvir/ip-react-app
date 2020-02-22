@@ -36,6 +36,40 @@ function adaptLocationResponseSchema(payload, state) {
     return res
 }
 
+
+function adaptGetInfoIpResponseSchema(payload) {
+    const nan = "nan";
+    const res = {
+        match: {
+            location: {
+                longitude:   payload.match.location.longitude ?  payload.match.location.longitude: nan,
+                latitude:  payload.match.location.latitude ?  payload.match.location.latitude: nan,
+                time_zone:  payload.match.location.time_zone ?  payload.match.location.time_zone : nan
+            },
+            city: {
+                names: {
+                    en:  payload.match.city.names.en ?  payload.match.city.names.en  : nan,
+                }
+            },
+            continent: {
+                names: {
+                    en:  payload.match.continent.names.en ?  payload.match.continent.names.en : nan
+                }
+            },
+            country: {
+                names: {
+                    en:  payload.match.country.names.en ?  payload.match.country.names.en : nan
+                }
+            },
+            postal: {
+                code:  payload.match.postal.code ?  payload.match.postal.code : nan
+            }
+        }
+    };
+    console.log(res);
+    return res
+}
+
 export const reducer = (state = exampleInitialState, action) => {
 
 
@@ -110,7 +144,7 @@ export const reducer = (state = exampleInitialState, action) => {
         case actionTypes.GET_INFO_IP_SUCCESS:
             return Object.assign({}, state, {
                 ...state,
-                results: action.payload,
+                results: adaptGetInfoIpResponseSchema(action.payload),
                 isLoadingGetInfoIp: false
 
             });
