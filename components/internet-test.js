@@ -1,33 +1,28 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import {startDownloadTest, startDownTest, startUpTest} from "../actions/actions-creators";
-import {startUploadTest} from "../actions/actions-creators";
+import {useSelector, useDispatch} from 'react-redux'
+import {startDownloadAndUploadTests} from "../actions/actions-creators";
+import InternetTestResults from "../components/internet-test-results"
 
 export default () => {
-  const dispatch = useDispatch();
-  const downloadSpeed = useSelector(state => state.downloadSpeed);
-  const uploadSpeed = useSelector(state => state.uploadSpeed);
+    const dispatch = useDispatch();
+
+    const startInternetSpeedTest = () => {
+            // Runs 5 times, with values of step 0 through 4.
+            dispatch(startDownloadAndUploadTests());
+    };
+
+    return (
+        <div className="card-body">
+            <p>Start your internet test speed right now</p>
+            <div>
+                <button style={{fontSize: "15px"}}
+                        className="btn btn-outline-success btn-rounded btn-sm my-md-n2"
+                        type="submit" onClick={startInternetSpeedTest}>Start Speed Test
+                </button>
+            </div>
+            <InternetTestResults/>
 
 
-  const startInternetSpeedTest = () => {
-
-      dispatch(startDownTest());
-      dispatch(startUpTest());
-  };
-
-  return (
-    <div className="card-body">
-                            <p>Start your internet test speed right now</p>
-                            <div>
-                                <button style={{fontSize: "15px"}}
-                                        className="btn btn-outline-success btn-rounded btn-sm my-md-n2"
-                                        type="submit" onClick={startInternetSpeedTest} >Start Speed Test
-                                </button>
-                            </div>
-
-        <p>Download Speed: {downloadSpeed.toString()}</p>
-        <p>Upload Speed: {uploadSpeed.toString()}</p>
-
-                        </div>
-  )
+        </div>
+    )
 }

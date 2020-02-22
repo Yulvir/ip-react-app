@@ -10,6 +10,10 @@ import {
     getMyIpSuccess, setDownloadSpeed, setMyIp, setUploadSpeed, startDownloadTest, startUploadTest,
 } from "./actions";
 
+const NetworkSpeed = require('network-speed');
+const testNetworkSpeed = new NetworkSpeed();
+
+
 export const fetchMyIp = () => {
     return async (dispatch) => {
         dispatch(getMyIpRequest());
@@ -26,25 +30,42 @@ export const fetchMyIp = () => {
 export const startDownTest = () => {
     return async (dispatch) => {
         dispatch(startDownloadTest());
-        require('speedtest-net')().on('downloadspeedprogress', speed => {
-            console.log('Download speed (in progress):', (speed * 125).toFixed(2), 'KB/s');
-            dispatch(setDownloadSpeed((speed * 125).toFixed(2)))
 
-        });
+        // https://www.npmjs.com/package/network-speed
+
+        const size = "300000000";
+        const baseUrl = `http://eu.httpbin.org/stream-bytes/${size}`;
+        const fileSizeInBytes = 50000000;
+        const fileSizeInBytes2 = 300000000;
+        const speed = await testNetworkSpeed.checkDownloadSpeed(baseUrl, fileSizeInBytes);
+        console.log(speed);
+        dispatch(setDownloadSpeed(speed.mbps / 8));
 
     };
 };
 export const startUpTest = () => {
     return async (dispatch) => {
         dispatch(startUploadTest());
-        require('speedtest-net')().on('uploadspeedprogress', speed => {
-            console.log('Upload speed (in progress):', (speed * 125).toFixed(2), 'KB/s');
-            dispatch(setUploadSpeed((speed * 125).toFixed(2)))
+        // https://www.npmjs.com/package/network-speed
+        const options = {
+            hostname: "localhost",
+            port: 5000,
+            path: "/catcher",
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        };
+        const fileSizeInBytes = 2000000;
 
-        });
+        const fileSizeInBytes2 = 10000000;
 
+        const speed = await testNetworkSpeed.checkUploadSpeed(options, fileSizeInBytes);
+        console.log(speed);
+        dispatch(setUploadSpeed((speed.mbps / 8)))
     };
 };
+
 
 export const getInfoIp = (ip) => {
     return async (dispatch) => {
@@ -68,7 +89,9 @@ export const getLocationResults = (location) => {
         const response = await fetch(url, {
             method: "POST",
             body: JSON.stringify(location),
-            headers: {"Content-Type": "application/json"}
+            headers: {
+                "Content-Type": "application/json"
+            }
         });
         const json = await response.json();
         if (response.status === 200) {
@@ -97,6 +120,20 @@ export function setGetLocationResults() {
 
     return function (dispatch, getState) {
         return dispatch(getLocationResults(getState().location))
+    }
+}
+
+
+export function startDownloadAndUploadTests() {
+    return function (dispatch, getState) {
+        // Remember I told you dispatch() can now handle thunks?
+        return dispatch(startDownTest()).then(() => {
+            // Assuming this is where the fetched user got stored
+
+            // Assuming it has a "postIDs" field:
+            // And we can dispatch() another thunk now!
+            return dispatch(startUpTest())
+        }).catch(reason => console.log(reason))
     }
 }
 

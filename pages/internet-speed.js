@@ -1,8 +1,6 @@
 import Link from 'next/link'
 import React from "react";
 import InternetTest from '../components/internet-test'
-var speedTest = require('speedtest-net');
-var test = speedTest();
 
 
 class InternetSpeed extends React.Component {
@@ -10,25 +8,13 @@ class InternetSpeed extends React.Component {
         const isServer = !!req;
 
         if (isServer) {
-
-            // Fired when download speed is found
-            require('speedtest-net')().on('downloadspeed', speed => {
-                console.log('Download speed:', (speed * 125).toFixed(2), 'KB/s');
-            });
-            // Fired when upload speed is found
-            require('speedtest-net')().on('uploadspeed', speed => {
-                console.log('Upload speed:', (speed * 125).toFixed(2), 'KB/s');
-            });
-
+            console.log("is server")
         }
 
         return {}
     }
 
 
-    startInternetSpeedTest = () => {
-
-    };
 
     render() {
 
