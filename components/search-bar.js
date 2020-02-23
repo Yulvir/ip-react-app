@@ -6,6 +6,8 @@ import GetLocationFromBrowser from "./get-location-from-browser";
 
 export default () => {
     const ipNotValid = useSelector(state => state.ipNotValid);
+    const isIpSearchError = useSelector(state => state.isIpSearchError);
+    const ipSearchError = useSelector(state => state.ipSearchError);
 
     return (
         <div>
@@ -13,6 +15,13 @@ export default () => {
                 ipNotValid && (
                     <div className="alert alert-danger" role="alert">
                             Ip not valid
+                        </div>
+                )
+
+            }{
+                isIpSearchError && (
+                    <div className="alert alert-danger" role="alert">
+                           {ipSearchError}
                         </div>
                 )
 

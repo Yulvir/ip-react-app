@@ -46,6 +46,10 @@ class Cidr extends React.Component {
                 console.log(`IP range for ${value} is`, ip_range);
 
                 console.log(`details for ${value} are:`);
+
+                const block = value.split("/")[1];
+                const nOfHosts = 2 ** (32-block);
+
                 const details = SubnetCIDRAdviser.getSubnetDetails(value);
                 console.log(details);
                 const recommendedConfiguration = IpSubnetCalculator.calculate(ip_range.start, ip_range.end);
@@ -54,7 +58,7 @@ class Cidr extends React.Component {
                     ipStart: ip_range.start,
                     ipEnd: ip_range.end,
                     recommendedConfiguration: recommendedConfiguration,
-                    nOfHosts: details.noofhosts.toString()
+                    nOfHosts: nOfHosts
                 });
                 console.log("Valid CIDR")
             }

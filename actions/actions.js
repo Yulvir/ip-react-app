@@ -22,7 +22,7 @@ export const setLocation = location => ({type: actionTypes.SET_LOCATION, payload
 
 export const getInfoIpRequest = () => ({type: actionTypes.GET_INFO_IP_REQUEST});
 export const getInfoIpSuccess = results => ({type: actionTypes.GET_INFO_IP_SUCCESS, payload: results});
-export const getInfoIpError = errors => ({type: actionTypes.GET_INFO_IP_ERROR, errors});
+export const getInfoIpError = errors => ({type: actionTypes.GET_INFO_IP_ERROR, payload: errors});
 
 export const setDownloadSpeed = downloadSpeed => ({type:actionTypes.SET_DOWNLOAD_SPEED, payload: downloadSpeed});
 export const setUploadSpeed = uploadSpeed => ({type:actionTypes.SET_UPLOAD_SPEED, payload: uploadSpeed});

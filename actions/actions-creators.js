@@ -76,8 +76,12 @@ export const getInfoIp = (ip) => {
         const json = await response.json();
         if (response.status === 200) {
             return dispatch(getInfoIpSuccess(json));
-        } else {
-            return dispatch(getInfoIpError(["Get info ip error"]));
+        }
+        else if (response.status === 404){
+            return dispatch(getInfoIpError(`Ip ${ip} not found`));
+        }
+        else {
+            return dispatch(getInfoIpError("Unknown error"));
         }
     };
 };

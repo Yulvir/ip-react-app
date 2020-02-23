@@ -35,6 +35,8 @@ const exampleInitialState = {
     isLoadingMyIp: true,
     results: default_results,
     myIp: "",
+    ipSearchError: "",
+    isIpSearchError: false,
     ipNotValid: false,
     startedValidating: false,
     copied: false,

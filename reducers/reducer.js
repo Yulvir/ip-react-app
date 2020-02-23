@@ -145,13 +145,15 @@ export const reducer = (state = exampleInitialState, action) => {
             return Object.assign({}, state, {
                 ...state,
                 results: adaptGetInfoIpResponseSchema(action.payload),
-                isLoadingGetInfoIp: false
-
+                isLoadingGetInfoIp: false,
+                isIpSearchError: false
             });
         case actionTypes.GET_INFO_IP_ERROR:
             return Object.assign({}, state, {
                 ...state,
-                isLoadingGetInfoIp: true
+                isLoadingGetInfoIp: true,
+                ipSearchError: action.payload,
+                isIpSearchError: true
             });
         case actionTypes.GET_INFO_IP_REQUEST:
             return Object.assign({}, state, {
@@ -181,6 +183,7 @@ export const reducer = (state = exampleInitialState, action) => {
                 ...state,
                 uploadSpeed: action.payload,
             });
+
         default:
             return state
     }

@@ -27,7 +27,7 @@ class RecommendedSubnetConfiguration extends Component {
                             Inverted Mask
                             <h4><span className="badge badge-primary badge-pill">{item.invertedMaskStr}</span></h4>
                         </li><li key={uuid()} className="list-group-item d-flex justify-content-between align-items-center">
-                            Ip End
+                            Prefix Mask
                             <h4><span className="badge badge-primary badge-pill">{item.prefixMaskStr}</span></h4>
                         </li>
                     </ul>
