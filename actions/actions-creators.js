@@ -34,7 +34,7 @@ export const startDownTest = () => {
         // https://www.npmjs.com/package/network-speed
 
         const size = "300000000";
-        const baseUrl = `http://eu.httpbin.org/stream-bytes/${size}`;
+        const baseUrl = `https://eu.httpbin.org/stream-bytes/${size}`;
         const fileSizeInBytes = 50000000;
         const fileSizeInBytes2 = 300000000;
         const speed = await testNetworkSpeed.checkDownloadSpeed(baseUrl, fileSizeInBytes);
