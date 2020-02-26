@@ -47,15 +47,36 @@ export const startUpTest = () => {
     return async (dispatch) => {
         dispatch(startUploadTest());
         // https://www.npmjs.com/package/network-speed
-        const options = {
-            hostname: "localhost",
-            port: 5000,
-            path: "/catcher",
+        let options = {};
+        console.log(BASE_URL);
+            let hostName = "https://getinfoip.com";
+            let path = "/api/catcher";
+
+             options = {
+            hostname: hostName,
+            path: path,
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
         };
+        if (BASE_URL.includes("localhost")){
+
+                    hostName = "localhost";
+        port = 5000;
+        path = "/catcher";
+         options = {
+            hostname: hostName,
+            port: port,
+            path: path,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        };
+        }
+
+
         const fileSizeInBytes = 2000000;
 
         const fileSizeInBytes2 = 10000000;
