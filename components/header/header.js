@@ -20,21 +20,21 @@ const Header = () => (
                     <script src="/static/assets/assets/js/popper.js"/>
                     <script src="/static/bootstrap/js/bootstrap.min.js"/>
 
-                    <link rel="shortcut icon" href="http://getinfoip.com/favicon.ico" />
-                    <link rel="apple-touch-icon" href="http://getinfoip.com/favicon.ico" />
-                    <link rel="apple-touch-icon" href="http://getinfoip.com/favicon.ico" />
-                    <link rel="apple-touch-icon" href="http://getinfoip.com/favicon.ico" />
-                    <link rel="apple-touch-icon" href="http://getinfoip.com/favicon.ico" />
+                    <link rel="shortcut icon" href="/static/favicon.ico" />
+                    <link rel="apple-touch-icon" href="/static/favicon.ico" />
+                    <link rel="apple-touch-icon" href="/static/favicon.ico" />
+                    <link rel="apple-touch-icon" href="/static/favicon.ico" />
+                    <link rel="apple-touch-icon" href="/static/favicon.ico" />
 
                     <meta property="og:type" content="website"/>
-                    <meta property="og:image" content="http://www.getinfoip.com/favicon.ico"/>
+                    <meta property="og:image" content="/static/favicon.ico"/>
                     <meta property="og:title" content= "Ip Translation Geographical Location Services for free"/>
                     <meta property="og:description" content="We geolocate any Ip through Maxmind Services. An IP address is an Internet Protocol Address. We also provide CIDR block utilities"/>
                     <meta property="og:site_name" content="getinfoip.com"/>
                     <meta property="og:url" content="http://getinfoip.com" />
 
                     <meta name="twitter:card" content="summary"/>
-                    <meta name="twitter:image" content="http://getinfoip.com/favicon.ico"/>
+                    <meta name="twitter:image" content="/static/favicon.ico"/>
                     <meta name="twitter:creator" content="@getinfoip"/>
                     <meta name="twitter:site" content="@getinfoip"/>
                     <meta name="twitter:title" content="Ip Translation Geographical Location Services for free"/>

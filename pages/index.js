@@ -10,8 +10,9 @@ const requestIp = require('request-ip');
 class Index extends React.Component {
     static async getInitialProps({reduxStore, req}) {
         const isServer = !!req;
-
+        console.log("Caca");
         if (typeof req != "undefined") {
+            console.log(req);
             const myIp = requestIp.getClientIp(req);
             console.log(myIp);
 
@@ -24,6 +25,9 @@ class Index extends React.Component {
                 reduxStore.dispatch(setMyIp(myIp));
                 await reduxStore.dispatch(getInfoIp(myIp));
             }
+        } else {
+            console.log("req is defined");
+            console.log(req)
         }
 
 
