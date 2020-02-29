@@ -30,6 +30,6 @@ export const setUploadSpeed = uploadSpeed => ({type:actionTypes.SET_UPLOAD_SPEED
 export const startDownloadTest = () => ({type:actionTypes.START_DOWNLOAD_TEST});
 export const startUploadTest = () => ({type:actionTypes.START_UPLOAD_TEST});
 
-export const setProgressDownloadSpeed = downloadSpeed => ({type:actionTypes.SET_PROGRESS_DOWNLOAD_SPEED, payload: downloadSpeed});
-export const setProgressUploadSpeed = uploadSpeed => ({type:actionTypes.SET_PROGRESS_UPLOAD_SPEED, payload: uploadSpeed});
-
+export const startGettingNews = () => ({type:actionTypes.START_GETTING_NEWS});
+export const finishGettingNews = () => ({type:actionTypes.FINISH_GETTING_NEWS});
+export const errorGettingNews = () => ({type:actionTypes.ERROR_GETTING_NEWS});

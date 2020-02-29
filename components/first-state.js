@@ -42,6 +42,9 @@ const exampleInitialState = {
     copied: false,
     ip: "",
     downloadSpeed: "",
-    uploadSpeed: ""
+    uploadSpeed: "",
+    news: {},
+    isGettingNews: false,
+    errorGettingNews: false
 };
 export default exampleInitialState;

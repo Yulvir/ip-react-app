@@ -19,6 +19,7 @@ class NavBar extends Component {
             <nav className="my-2 my-md-0 mr-md-3 ml-auto">
                   <Link href="/content" className="text-dark"><span className="btn btn-info text-dark">Documentation</span></Link>
                   <Link href="/internet-speed" className="text-dark"><span className="btn btn-info text-dark">Internet Speed</span></Link>
+                  <Link href="/news" className="text-dark"><span className="btn btn-info text-dark">Tech News</span></Link>
                   <Link href="/cidr" className="text-dark"><span className="btn btn-info text-dark">Cidr</span></Link>
                   <Link href="/" className="text-dark"><span className="btn btn-nfo text-dark">Home</span></Link>
             </nav>

@@ -6,9 +6,15 @@ import InternetTestResults from "../components/internet-test-results"
 export default () => {
     const dispatch = useDispatch();
 
+
     const startInternetSpeedTest = () => {
             // Runs 5 times, with values of step 0 through 4.
-            dispatch(startDownloadAndUploadTests());
+
+            if (typeof window !== 'undefined') {
+            // client-side-only code
+                 dispatch(startDownloadAndUploadTests());
+            }
+
     };
 
     return (

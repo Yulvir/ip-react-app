@@ -1,13 +1,15 @@
-import BASE_URL from "../components/config";
+import BASE_URL_API from "../components/config";
 import fetch from "cross-fetch";
 import publicIp from "public-ip";
 import {
+    errorGettingNews,
+    finishGettingNews,
     getInfoIpError,
     getInfoIpRequest,
     getInfoIpSuccess, getLocationInfoError, getLocationInfoRequest, getLocationInfoSuccess,
     getMyIpError,
     getMyIpRequest,
-    getMyIpSuccess, setDownloadSpeed, setMyIp, setUploadSpeed, startDownloadTest, startUploadTest,
+    getMyIpSuccess, setDownloadSpeed, setMyIp, setUploadSpeed, startDownloadTest, startGettingNews, startUploadTest,
 } from "./actions";
 
 const NetworkSpeed = require('network-speed');
@@ -48,11 +50,11 @@ export const startUpTest = () => {
         dispatch(startUploadTest());
         // https://www.npmjs.com/package/network-speed
         let options = {};
-        console.log(BASE_URL);
-            let hostName = "https://getinfoip.com";
-            let path = "/api/catcher";
+        console.log(BASE_URL_API);
+        let hostName = "https://getinfoip.com";
+        let path = "/api/catcher";
 
-             options = {
+        options = {
             hostname: hostName,
             path: path,
             method: "POST",
@@ -60,25 +62,24 @@ export const startUpTest = () => {
                 "Content-Type": "application/json",
             },
         };
-        if (BASE_URL.includes("localhost")){
+        if (BASE_URL_API.includes("localhost")) {
 
-                    hostName = "localhost";
-        port = 5000;
-        path = "/catcher";
-         options = {
-            hostname: hostName,
-            port: port,
-            path: path,
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        };
+            hostName = "localhost";
+            let port = 5000;
+            path = "/catcher";
+            options = {
+                hostname: hostName,
+                port: port,
+                path: path,
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            };
         }
 
 
         const fileSizeInBytes = 2000000;
-
         const fileSizeInBytes2 = 10000000;
 
         const speed = await testNetworkSpeed.checkUploadSpeed(options, fileSizeInBytes);
@@ -91,17 +92,15 @@ export const startUpTest = () => {
 export const getInfoIp = (ip) => {
     return async (dispatch) => {
         dispatch(getInfoIpRequest());
-        const url = `${BASE_URL}/ip_info?ip=${ip}`;
+        const url = `${BASE_URL_API}/ip_info?ip=${ip}`;
 
         const response = await fetch(url);
         const json = await response.json();
         if (response.status === 200) {
             return dispatch(getInfoIpSuccess(json));
-        }
-        else if (response.status === 404){
+        } else if (response.status === 404) {
             return dispatch(getInfoIpError(`Ip ${ip} not found`));
-        }
-        else {
+        } else {
             return dispatch(getInfoIpError("Unknown error"));
         }
     };
@@ -110,7 +109,8 @@ export const getInfoIp = (ip) => {
 export const getLocationResults = (location) => {
     return async (dispatch) => {
         dispatch(getLocationInfoRequest());
-        const url = `${BASE_URL}/location_info`;
+        const url = `${BASE_URL_API}/location_info`;
+        console.log(url);
         const response = await fetch(url, {
             method: "POST",
             body: JSON.stringify(location),
@@ -127,6 +127,27 @@ export const getLocationResults = (location) => {
     };
 };
 
+export const getNews = (query) => {
+    return async (dispatch) => {
+        dispatch(startGettingNews());
+        const body = {phrase: query};
+        const url = `${BASE_URL_API}/crawler`;
+        console.log(url);
+        const response = await fetch(url, {
+            method: "POST",
+            body: JSON.stringify(body),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        const json = await response.json();
+        if (response.status === 200) {
+            return dispatch(finishGettingNews(json));
+        } else {
+            return dispatch(errorGettingNews([`Getting news error ${response.statusText}`]));
+        }
+    };
+};
 
 // Now we can combine them
 export function setGetInfoIpResults() {

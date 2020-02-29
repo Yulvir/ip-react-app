@@ -3,14 +3,14 @@
 // para npm start ----> process.env.NODE_ENV = development
 // para npm run build ----> process.env.NODE_ENV = production
 
-let BASE_URL =  "http://localhost:5000";
+let BASE_URL_API =  "http://localhost:5000";
+let BASE_URL_CONTENT =  "http://localhost:3000/static";
 console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'production'){
-    BASE_URL = "https://getinfoip.com/api";
+    BASE_URL_API = "https://getinfoip.com/api";
+    BASE_URL_CONTENT = "http://getinfoip.com/";
 }
 
-
-export default BASE_URL;
 
 
 
