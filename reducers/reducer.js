@@ -178,10 +178,36 @@ export const reducer = (state = exampleInitialState, action) => {
                 downloadSpeed: action.payload,
             });
 
+        case actionTypes.START_GETTING_NEWS:
+            return Object.assign({}, state, {
+                ...state,
+                errorGettingNews: false,
+                isGettingNews: true
+            });
+        case actionTypes.FINISH_GETTING_NEWS:
+            return Object.assign({}, state, {
+                ...state,
+                news: action.payload,
+                isGettingNews: true,
+                errorGettingNews: false,
+            });
+        case actionTypes.ERROR_GETTING_NEWS:
+            return Object.assign({}, state, {
+                ...state,
+                news: action.payload,
+                isGettingNews: false,
+                errorGettingNews: true
+            });
+
         case actionTypes.SET_UPLOAD_SPEED:
             return Object.assign({}, state, {
                 ...state,
                 uploadSpeed: action.payload,
+            });
+        case actionTypes.SET_CLIENT_REQUEST:
+            return Object.assign({}, state, {
+                ...state,
+                req: action.payload,
             });
 
         default:

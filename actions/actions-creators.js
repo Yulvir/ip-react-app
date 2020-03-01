@@ -2,12 +2,13 @@ import BASE_URL from "../components/config";
 import fetch from "cross-fetch";
 import publicIp from "public-ip";
 import {
+    errorGettingNews, finishGettingNews,
     getInfoIpError,
     getInfoIpRequest,
     getInfoIpSuccess, getLocationInfoError, getLocationInfoRequest, getLocationInfoSuccess,
     getMyIpError,
     getMyIpRequest,
-    getMyIpSuccess, setDownloadSpeed, setMyIp, setUploadSpeed, startDownloadTest, startUploadTest,
+    getMyIpSuccess, setDownloadSpeed, setMyIp, setUploadSpeed, startDownloadTest, startGettingNews, startUploadTest,
 } from "./actions";
 
 const NetworkSpeed = require('network-speed');
@@ -127,6 +128,24 @@ export const getLocationResults = (location) => {
     };
 };
 
+export const getNews = (query) => {
+    return async (dispatch) => {
+        dispatch(startGettingNews());
+        const body = {phrase: query};
+        const url = `${BASE_URL}/news`;
+        console.log(url);
+        const response = await fetch(url, {
+            method: "GET",
+        });
+        const json = await response.json();
+        if (response.status === 200) {
+            console.log(json);
+            return dispatch(finishGettingNews(json));
+        } else {
+            return dispatch(errorGettingNews([`Getting news error ${response.statusText}`]));
+        }
+    };
+};
 
 // Now we can combine them
 export function setGetInfoIpResults() {

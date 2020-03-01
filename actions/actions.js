@@ -33,3 +33,9 @@ export const startUploadTest = () => ({type:actionTypes.START_UPLOAD_TEST});
 export const setProgressDownloadSpeed = downloadSpeed => ({type:actionTypes.SET_PROGRESS_DOWNLOAD_SPEED, payload: downloadSpeed});
 export const setProgressUploadSpeed = uploadSpeed => ({type:actionTypes.SET_PROGRESS_UPLOAD_SPEED, payload: uploadSpeed});
 
+
+export const setClientRequest = (req) => ({type:actionTypes.SET_CLIENT_REQUEST, payload: req});
+
+export const startGettingNews = () => ({type:actionTypes.START_GETTING_NEWS});
+export const finishGettingNews = (data) => ({type:actionTypes.FINISH_GETTING_NEWS, payload: data});
+export const errorGettingNews = (error) => ({type:actionTypes.ERROR_GETTING_NEWS, payload: error});

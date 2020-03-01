@@ -35,5 +35,10 @@ export const actionTypes = {
     SET_UPLOAD_SPEED: `${prefix} Set Upload Speed`,
 
     SET_PROGRESS_DOWNLOAD_SPEED : `${prefix} Set Progress Download Speed`,
-    SET_PROGRESS_UPLOAD_SPEED : `${prefix} Set Progress Upload Speed`
+    SET_PROGRESS_UPLOAD_SPEED : `${prefix} Set Progress Upload Speed`,
+
+    SET_CLIENT_REQUEST : `${prefix} Set Client Request`,
+        START_GETTING_NEWS : `${prefix} Start Getting News`,
+    FINISH_GETTING_NEWS : `${prefix} Finish Getting News`,
+    ERROR_GETTING_NEWS : `${prefix} Error Getting News`
 };
