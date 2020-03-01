@@ -42,24 +42,21 @@ const displayDescription = (metaUrls, classes, bull) => {
     );
 };
 
-const displayMedia = (metaUrls, classes, url) =>{
+const displayMedia = (imageUrl, classes, url) =>{
 
-    return (metaUrls.map((meta, index) => (
-            <div key={index}>
+    return (
+            <div>
 
-                {
+
                     <CardMedia
                     className={classes.media}
-                    image={meta.name}
+                    image={imageUrl}
                     title={url}
                   />
 
-                }
+
             </div>
-
-        ))
-    );
-
+        )
 };
 
 export default function SimpleCard(props) {
@@ -68,6 +65,11 @@ export default function SimpleCard(props) {
     console.log(props.metaUrls);
     const bull = <span className={classes.bullet}>•</span>;
 
+
+    const imageUrl = props.metaUrls.filter( function (meta) {
+      return  ("image" in meta)
+    });
+    console.log(imageUrl);
     return (
         <Card className={classes.root}>
             <CardContent>
@@ -76,7 +78,7 @@ export default function SimpleCard(props) {
 
             </CardContent>
 
-            {displayMedia(props.metaUrls, classes, props.url)}
+            {displayMedia(imageUrl, classes, props.url)}
 
             <CardActions>
                 <Button size="small" href={props.url}>{props.url}</Button>

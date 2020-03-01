@@ -25,15 +25,10 @@ class Index extends React.Component {
                 await reduxStore.dispatch(getInfoIp(myIp));
             }
 
-
-
         } else {
-
             console.log("req is undefined");
             console.log(req)
         }
-
-
         return {}
     }
     componentDidMount() {

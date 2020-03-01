@@ -1,6 +1,5 @@
 import React, {useRef} from 'react';
 import {Map, GoogleApiWrapper, Marker} from 'google-maps-react';
-import PropTypes from 'prop-types';
 import {useSelector} from "react-redux";
 let mapStyles = {
     maxWidth: '100vw',
