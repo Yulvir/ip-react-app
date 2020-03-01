@@ -1,7 +1,8 @@
 import React from 'react'
 import {useSelector} from "react-redux";
 import {CircularProgressbar, buildStyles} from 'react-circular-progressbar';
-import SimpleCard from "./card-news";
+import SimpleCard from "./card/card-news";
+import Divider from "@material-ui/core/Divider";
 
 export default () => {
     const news = useSelector(state => state.news);
@@ -20,7 +21,7 @@ export default () => {
 
           <div key={index}>
               <SimpleCard url={website.url} metaUrls={website.meta_urls} />
-
+             <Divider />
           </div>
 
         ))
