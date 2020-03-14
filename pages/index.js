@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import App from '../components/app'
-import {fetchMyIp, fetchMyIpAndGetInfoIp, getInfoIp, setMyIpAndGetInfoIp} from "../actions/actions-creators";
-import {setClientRequest, setMyIp} from "../actions/actions";
+import {fetchMyIpAndGetInfoIp, getInfoIp} from "../actions/actions-creators";
+import {setMyIp} from "../actions/actions";
 
 const requestIp = require('request-ip');
 

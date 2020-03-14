@@ -17,10 +17,10 @@ export default () => {
                             <p>We are improving our website every day. Our goal is to provide an intuitive user interface where users can get data-driven answers </p>
                             <h2>Ip Geolocation Services</h2>
                             <p>Our backend is currently using MaxMind geolite2 databases. We enrich IP's with geolocation data and present it in a user friendly way.</p>
-                            <Link href="/content" className="text-info" ><p>What is IP address?</p></Link>
+                            <Link href="/content" ><p>What is IP address?</p></Link>
                             <h2>CIDR Block calculation</h2>
                             <p>Give us a CIDR block and get the most important features of that CIDR block</p>
-                            <Link href="/cidr" className="text-info" ><p>Try now</p></Link>
+                            <Link href="/cidr" ><p>Try now</p></Link>
                         </div>
 
                     </div>
