@@ -4,12 +4,11 @@ import GoogleMap from './google-map'
 import IntroductionText from './introduction-text'
 import React from "react";
 import SearchBar from './search-bar'
+
 export default () => {
     const isLoadingGetInfoIp = useSelector(state => state.isLoadingGetInfoIp);
     return (
         <div>
-
-
 
             <div className="container-fluid">
                 <div className="mx-auto" style={{width: "400px"}}>
@@ -26,7 +25,7 @@ export default () => {
                             <h1 className="my-0 font-weight-lighter ">Search with your current IP</h1>
                         </div>
                         <div className="card-body">
-                                <SearchBar/>
+                            <SearchBar/>
                         </div>
                         <div className="card-body">
 

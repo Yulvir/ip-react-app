@@ -10,6 +10,7 @@ import {
     getMyIpRequest,
     getMyIpSuccess, setDownloadSpeed, setMyIp, setUploadSpeed, startDownloadTest, startGettingNews, startUploadTest,
 } from "./actions";
+import * as requestIp from "request-ip";
 
 const NetworkSpeed = require('network-speed');
 const testNetworkSpeed = new NetworkSpeed();
@@ -49,6 +50,7 @@ export const startUpTest = () => {
         dispatch(startUploadTest());
         // https://www.npmjs.com/package/network-speed
         let options = {};
+        let port = null;
         console.log(BASE_URL);
             let hostName = "https://getinfoip.com";
             let path = "/api/catcher";
@@ -225,3 +227,24 @@ export function setMyIpAndGetInfoIp() {
     }
 }
 
+
+export async function saveClientRequest(req, reduxStore) {
+    if (typeof req != "undefined") {
+        // reduxStore.dispatch(setClientRequest(req));
+        const myIp = requestIp.getClientIp(req);
+        console.log(myIp);
+        if (["::1", "::ffff:127.0.0.1", "127.0.0.1"].includes(myIp)) {
+            console.log("Browser at localhost");
+            await reduxStore.dispatch(fetchMyIpAndGetInfoIp())
+
+        } else {
+            console.log("Browser at " + myIp);
+            reduxStore.dispatch(setMyIp(myIp));
+            await reduxStore.dispatch(getInfoIp(myIp));
+        }
+
+    } else {
+        console.log("req is undefined");
+        console.log(req)
+    }
+}

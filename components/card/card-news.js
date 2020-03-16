@@ -42,22 +42,32 @@ const displayDescription = (metaUrls, classes, bull) => {
     );
 };
 
-const displayMedia = (imageUrl, classes, url) =>{
+const displayMedia = (metaUrls, classes, url) =>{
+
+    const imageUrl = metaUrls.find( function (meta) {
+      return  (meta.hasOwnProperty("twitter_image"))
+    });
+    console.log(imageUrl);
 
     return (
             <div>
-
-
+                {
+                imageUrl && (
                     <CardMedia
                     className={classes.media}
-                    image={imageUrl}
+                    component="img"
+                      alt={url}
+                    image={imageUrl.twitter_image}
                     title={url}
                   />
+                )
 
-
+            }
             </div>
         )
 };
+
+//
 
 export default function SimpleCard(props) {
     const classes = useStyles();
@@ -66,19 +76,15 @@ export default function SimpleCard(props) {
     const bull = <span className={classes.bullet}>•</span>;
 
 
-    const imageUrl = props.metaUrls.filter( function (meta) {
-      return  ("image" in meta)
-    });
-    console.log(imageUrl);
     return (
         <Card className={classes.root}>
             <CardContent>
 
                 {displayDescription(props.metaUrls, classes, bull)}
+                {displayMedia(props.metaUrls, classes, props.url)}
 
             </CardContent>
 
-            {displayMedia(imageUrl, classes, props.url)}
 
             <CardActions>
                 <Button size="small" href={props.url}>{props.url}</Button>

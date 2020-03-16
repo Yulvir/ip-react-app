@@ -1,15 +1,12 @@
 import Link from 'next/link'
 import React from "react";
 import PopNews from '../components/pop-news'
-import {getNews} from "../actions/actions-creators";
+import {getNews, saveClientRequest} from "../actions/actions-creators";
 class News extends React.Component {
+
+
     static async getInitialProps({reduxStore, req}) {
-        const isServer = !!req;
-
-        if (isServer) {
-            console.log("is server")
-        }
-
+        await saveClientRequest(req, reduxStore);
         await reduxStore.dispatch(getNews("best phones in market"));
         return {}
     }

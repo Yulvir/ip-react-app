@@ -1,13 +1,19 @@
 import React, {Component} from 'react';
 import RecommendedSubnetConfiguration from "../components/cidr/recommended-subnet-configuration";
+import {fetchMyIpAndGetInfoIp, getInfoIp, saveClientRequest} from "../actions/actions-creators";
+import {setMyIp} from "../actions/actions";
+import * as requestIp from "request-ip";
 let SubnetCIDRAdviser = require('subnet-cidr-calculator');
 const IpCidr = require("ip-cidr");
 const cidrRegex = require('cidr-regex');
 var IpSubnetCalculator = require('ip-subnet-calculator');
 
+
+
 class Cidr extends React.Component {
-    static getInitialProps({store}) {
-        return {};
+    static async getInitialProps({reduxStore, req}) {
+        await saveClientRequest(req, reduxStore);
+        return {}
     }
 
     constructor(props) {

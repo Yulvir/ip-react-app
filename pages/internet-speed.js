@@ -1,16 +1,12 @@
 import Link from 'next/link'
 import React from "react";
 import InternetTest from '../components/internet-test'
+import {saveClientRequest} from "../actions/actions-creators";
 
 
 class InternetSpeed extends React.Component {
     static async getInitialProps({reduxStore, req}) {
-        const isServer = !!req;
-
-        if (isServer) {
-            console.log("is server")
-        }
-
+        await saveClientRequest(req, reduxStore);
         return {}
     }
 
